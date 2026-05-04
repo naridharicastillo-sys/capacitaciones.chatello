@@ -163,7 +163,10 @@ textarea.inp{min-height:80px;resize:none}
 ══════════════════════════════════════════ -->
 <div id="s-p-list" class="screen">
   <div class="topbar mod-p"><div class="tb-back" onclick="goBack()">‹</div><div><div class="tb-title">Postulación</div></div>
-    <div class="tb-right"><button class="btn btn-primary btn-sm btn-center" style="margin:0;padding:8px 14px;font-size:12px" onclick="goTo('s-p-new')">+ Nuevo</button></div>
+    <div class="tb-right" style="display:flex;gap:8px;align-items:center">
+      <button onclick="goToMenu()" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:7px 10px;border-radius:9px;font-size:14px;cursor:pointer">🏠</button>
+      <button class="btn btn-primary btn-sm btn-center" style="margin:0;padding:8px 14px;font-size:12px" onclick="goTo('s-p-new')">+ Nuevo</button>
+    </div>
   </div>
   <div class="content">
     <div class="stitle">Candidatos activos</div>
@@ -172,7 +175,9 @@ textarea.inp{min-height:80px;resize:none}
 </div>
 
 <div id="s-p-new" class="screen">
-  <div class="topbar mod-p"><div class="tb-back" onclick="goBack()">‹</div><div class="tb-title">Nuevo candidato</div></div>
+  <div class="topbar mod-p"><div class="tb-back" onclick="goBack()">‹</div><div class="tb-title">Nuevo candidato</div>
+    <div class="tb-right"><button onclick="goToMenu()" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:7px 10px;border-radius:9px;font-size:14px;cursor:pointer">🏠</button></div>
+  </div>
   <div class="content">
     <div class="ig"><label class="lbl">Nombre completo</label><input id="pn-nombre" class="inp" type="text" placeholder="Nombre completo del candidato"></div>
     <div class="ig"><label class="lbl">Puesto al que aplica</label>
@@ -503,6 +508,7 @@ function goBack() {
   const prev = S.history[S.history.length - 1];
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(prev).classList.add('active');
+  loadScreen(prev);
   window.scrollTo(0,0);
 }
 
@@ -1052,23 +1058,4 @@ async function saveDuda() {
   await apiPost({action:'saveDuda', pregunta: q, supervisor: S.supervisor?.nombre});
   doneLoading();
   toast('Pregunta enviada ✓ Ari la responderá pronto');
-  document.getElementById('mc-new-q').value='';
-  goBack();
-}
-
-// ════════════════════════════════════════════
-// INIT
-// ════════════════════════════════════════════
-document.addEventListener('DOMContentLoaded', () => {
-  // Restaurar sesión si existe
-  const saved = sessionStorage.getItem('chatello_sup');
-  if (saved) {
-    try {
-      S.supervisor = JSON.parse(saved);
-      document.getElementById('menu-name').textContent = S.supervisor.nombre;
-    } catch(e) {}
-  }
-});
-</script>
-</body>
-</html>
+  document.getElementById('mc-new-q').value=
