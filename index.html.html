@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Capacitaciones · Chatello</title>
+<style>
+:root{--cafe:#5c3a21;--naranja:#c8935a;--crema:#f5f5f0;--crema-dark:#e0d8cc;--verde:#7b9e6b;--azul:#5b8dd9;--morado:#9c6bb5;--naranja2:#e07b39;--texto:#2d1f13;--gris:#7a6a5a;--r:#f44336;--g:#4caf50;--y:#ff9800}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--crema);color:var(--texto);overflow:hidden}
+.screen{display:none;flex-direction:column;height:100vh;overflow:hidden}
+.screen.active{display:flex}
+/* TOPBAR */
+.topbar{padding:52px 18px 14px;display:flex;align-items:center;gap:12px;flex-shrink:0;color:#fff}
+.topbar.mod-p{background:#7b9e6b}.topbar.mod-i{background:#5b8dd9}.topbar.mod-c{background:#c8935a}.topbar.mod-e{background:#9c6bb5}.topbar.mod-mc{background:#e07b39}.topbar.mod-root{background:#5c3a21}
+.tb-back{font-size:22px;cursor:pointer;width:32px;flex-shrink:0;line-height:1}
+.tb-title{font-size:16px;font-weight:700;flex:1;line-height:1.2}
+.tb-sub{font-size:11px;opacity:.75;margin-top:2px}
+.tb-right{margin-left:auto;flex-shrink:0}
+/* CONTENT */
+.content{flex:1;overflow-y:auto;padding:18px 16px 32px;-webkit-overflow-scrolling:touch}
+/* BUTTONS */
+.btn{display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;border:none;border-radius:13px;font-size:15px;font-weight:600;cursor:pointer;margin-bottom:10px;text-align:left;transition:opacity .15s;-webkit-appearance:none}
+.btn:active{opacity:.7}
+.btn-primary{background:var(--naranja);color:#fff}
+.btn-dark{background:var(--cafe);color:#fff}
+.btn-light{background:#fff;color:var(--texto);border:1.5px solid var(--crema-dark)}
+.btn-danger{background:#fce4ec;color:#c62828;border:1.5px solid #ef9a9a}
+.btn-ghost{background:transparent;color:var(--cafe);border:1.5px solid var(--cafe)}
+.btn-center{justify-content:center;text-align:center}
+.btn-sm{padding:10px 14px;font-size:13px;margin-bottom:8px;border-radius:10px}
+.btn-icon{font-size:20px;flex-shrink:0}
+.btn-text{flex:1}.btn-text small{display:block;font-size:12px;font-weight:400;color:var(--gris);margin-top:1px}
+/* INPUTS */
+.ig{margin-bottom:14px}
+.lbl{display:block;font-size:12px;font-weight:700;color:var(--gris);margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+.inp{width:100%;padding:13px 14px;border:1.5px solid var(--crema-dark);border-radius:11px;font-size:15px;background:#fff;color:var(--texto);outline:none;font-family:inherit;-webkit-appearance:none}
+.inp:focus{border-color:var(--naranja)}
+.inp.sel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a6a5a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;appearance:none}
+textarea.inp{min-height:80px;resize:none}
+/* LIST ITEMS */
+.li{display:flex;align-items:center;justify-content:space-between;background:#fff;border-radius:13px;padding:14px 16px;margin-bottom:10px;cursor:pointer;border:1.5px solid transparent;gap:10px}
+.li:active{border-color:var(--naranja)}
+.li-left{flex:1;min-width:0}
+.li-name{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.li-sub{font-size:12px;color:var(--gris);margin-top:2px}
+/* BADGES */
+.bdg{display:inline-block;padding:3px 9px;border-radius:12px;font-size:11px;font-weight:700;white-space:nowrap;flex-shrink:0}
+.bdg-ok{background:#e6f4ea;color:#2e7d32}.bdg-warn{background:#fff8e1;color:#795548}.bdg-err{background:#fce4ec;color:#c62828}.bdg-neu{background:#f0ebe3;color:#5c3a21}.bdg-pur{background:#ede7f6;color:#4527a0}
+/* SECTION TITLE */
+.stitle{font-size:11px;font-weight:700;color:var(--gris);text-transform:uppercase;letter-spacing:.6px;margin:18px 0 10px}
+.stitle:first-child{margin-top:0}
+/* CARD */
+.card{background:#fff;border-radius:13px;padding:16px;margin-bottom:12px;border:1.5px solid var(--crema-dark)}
+/* PROGRESS */
+.prog-bar{background:var(--crema-dark);border-radius:99px;height:8px;overflow:hidden;margin:6px 0 10px}
+.prog-fill{height:100%;border-radius:99px;background:var(--verde);transition:width .4s}
+/* SEARCH */
+.search-wrap{position:relative;margin-bottom:14px}
+.search-wrap .inp{padding-left:42px}
+.search-wrap::before{content:'🔍';position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none}
+/* CHECKLIST ITEM */
+.ci{background:#fff;border-radius:13px;padding:14px 16px;margin-bottom:10px}
+.ci-title{font-size:14px;font-weight:600;margin-bottom:9px;line-height:1.3}
+.ci-states{display:flex;gap:7px}
+.csb{flex:1;padding:8px 4px;border:1.5px solid var(--crema-dark);border-radius:9px;font-size:11px;font-weight:600;cursor:pointer;text-align:center;background:#fff;transition:.15s}
+.csb:active{opacity:.7}
+.csb.s-done{background:#e6f4ea;border-color:#81c784;color:#2e7d32}
+.csb.s-pend{background:#fff8e1;border-color:#ffca28;color:#795548}
+.csb.s-na{background:#ede7f6;border-color:#b39ddb;color:#4527a0}
+/* TAGS */
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.tag{padding:8px 14px;border:1.5px solid var(--crema-dark);border-radius:20px;font-size:13px;cursor:pointer;background:#fff;transition:.15s}
+.tag.sel{background:var(--cafe);color:#fff;border-color:var(--cafe)}
+/* PIN */
+.pin-dots{display:flex;justify-content:center;gap:14px;margin:28px 0 8px}
+.pd{width:18px;height:18px;border-radius:50%;border:2px solid var(--naranja);background:transparent;transition:background .1s}
+.pd.f{background:var(--naranja)}
+.kp{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:270px;margin:20px auto 0}
+.kk{aspect-ratio:1;border-radius:50%;border:none;font-size:24px;font-weight:400;cursor:pointer;background:#fff;color:var(--cafe);box-shadow:0 2px 8px rgba(0,0,0,.1);transition:.1s;font-family:inherit}
+.kk:active{background:var(--crema-dark);transform:scale(.95)}
+.kk.empty{background:transparent;box-shadow:none;pointer-events:none}
+/* EVAL */
+.ev-item{background:#fff;border-radius:13px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ev-lbl{font-size:14px;font-weight:600;flex:1}
+.tg-group{display:flex;gap:7px}
+.tg{width:44px;height:36px;border-radius:9px;border:1.5px solid var(--crema-dark);font-size:16px;cursor:pointer;background:#fff;display:flex;align-items:center;justify-content:center;transition:.15s}
+.tg.yes{background:#e6f4ea;border-color:#81c784}
+.tg.no{background:#fce4ec;border-color:#ef9a9a}
+/* ARTICLE */
+.art-step{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--crema);font-size:14px;line-height:1.4;align-items:flex-start}
+.step-n{width:24px;height:24px;border-radius:50%;background:var(--naranja);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.ingr-item{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--crema);font-size:14px}
+/* LOADING */
+.ld{position:fixed;inset:0;background:rgba(245,245,240,.9);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99;display:none}
+.sp{width:36px;height:36px;border:3px solid var(--crema-dark);border-top-color:var(--naranja);border-radius:50%;animation:spin .7s linear infinite;margin-bottom:12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ld-txt{font-size:13px;color:var(--gris)}
+/* TOAST */
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:var(--cafe);color:#fff;padding:11px 20px;border-radius:22px;font-size:13px;font-weight:600;z-index:199;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .3s}
+.toast.show{opacity:1}
+/* EMPTY */
+.empty{text-align:center;padding:50px 20px;color:var(--gris)}
+.empty .ei{font-size:44px;margin-bottom:14px}
+.empty p{font-size:14px;line-height:1.6}
+/* AVANCE COLORS */
+.av-vista{background:#f0f4ff;color:#3949ab;border:1.5px solid #9fa8da}
+.av-practicado{background:#fff8e1;color:#795548;border:1.5px solid #ffca28}
+.av-dominado{background:#e6f4ea;color:#2e7d32;border:1.5px solid #81c784}
+/* MC call button */
+.call-btn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:18px;background:#e07b39;color:#fff;border:none;border-radius:13px;font-size:16px;font-weight:700;cursor:pointer;text-decoration:none;margin-top:8px}
+.call-btn:active{opacity:.8}
+</style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div class="ld" id="ld"><div class="sp"></div><div class="ld-txt" id="ld-txt">Cargando...</div></div>
+<div class="toast" id="toast"></div>
+
+<!-- ══════════════════════════════════════════
+     LOGIN
+══════════════════════════════════════════ -->
+<div id="s-login" class="screen active">
+  <div class="topbar mod-root" style="justify-content:center;flex-direction:column;align-items:center;padding-top:80px;padding-bottom:24px">
+    <div style="font-size:36px;margin-bottom:6px">☕</div>
+    <div class="tb-title" style="text-align:center;font-size:20px">Chatello</div>
+    <div class="tb-sub" style="text-align:center">Capacitaciones</div>
+  </div>
+  <div class="content" style="display:flex;flex-direction:column;align-items:center">
+    <div style="font-size:14px;color:var(--gris)">Ingresa tu PIN</div>
+    <div class="pin-dots"><div class="pd" id="d0"></div><div class="pd" id="d1"></div><div class="pd" id="d2"></div><div class="pd" id="d3"></div></div>
+    <div id="pin-err" style="color:#f44336;font-size:13px;min-height:20px;margin-bottom:4px;text-align:center"></div>
+    <div class="kp">
+      <button class="kk" onclick="pinKey('1')">1</button><button class="kk" onclick="pinKey('2')">2</button><button class="kk" onclick="pinKey('3')">3</button>
+      <button class="kk" onclick="pinKey('4')">4</button><button class="kk" onclick="pinKey('5')">5</button><button class="kk" onclick="pinKey('6')">6</button>
+      <button class="kk" onclick="pinKey('7')">7</button><button class="kk" onclick="pinKey('8')">8</button><button class="kk" onclick="pinKey('9')">9</button>
+      <button class="kk empty"></button><button class="kk" onclick="pinKey('0')">0</button><button class="kk" onclick="pinBack()" style="font-size:18px">⌫</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     MENÚ PRINCIPAL
+══════════════════════════════════════════ -->
+<div id="s-menu" class="screen">
+  <div class="topbar mod-root">
+    <div style="flex:1"><div class="tb-title">☕ Chatello</div><div class="tb-sub" id="menu-name">—</div></div>
+    <div class="tb-right"><button onclick="logout()" style="background:rgba(255,255,255,.15);border:none;color:#fff;padding:7px 13px;border-radius:9px;font-size:12px;font-weight:600;cursor:pointer">Salir</button></div>
+  </div>
+  <div class="content">
+    <div class="stitle">Módulos</div>
+    <button class="btn btn-light" onclick="goTo('s-p-list')"><span class="btn-icon">📋</span><div class="btn-text">Postulación<small>Candidatos y entrevistas</small></div><span style="color:var(--gris)">›</span></button>
+    <button class="btn btn-light" onclick="goTo('s-i-list')"><span class="btn-icon">🚪</span><div class="btn-text">Ingreso<small>Checklist y primera semana</small></div><span style="color:var(--gris)">›</span></button>
+    <button class="btn btn-light" onclick="goTo('s-c-list')"><span class="btn-icon">📚</span><div class="btn-text">Capacitar<small>Artículos y recetas</small></div><span style="color:var(--gris)">›</span></button>
+    <button class="btn btn-light" onclick="goTo('s-e-list')"><span class="btn-icon">⭐</span><div class="btn-text">Evaluar<small>Evaluación de artículos</small></div><span style="color:var(--gris)">›</span></button>
+    <button class="btn btn-light" onclick="goTo('s-mc-search')"><span class="btn-icon">💡</span><div class="btn-text">Mejora Continua<small>Dudas y protocolos</small></div><span style="color:var(--gris)">›</span></button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     POSTULACIÓN
+══════════════════════════════════════════ -->
+<div id="s-p-list" class="screen">
+  <div class="topbar mod-p"><div class="tb-back" onclick="goBack()">‹</div><div><div class="tb-title">Postulación</div></div>
+    <div class="tb-right" style="display:flex;gap:8px;align-items:center">
+      <button onclick="goToMenu()" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:7px 10px;border-radius:9px;font-size:14px;cursor:pointer">🏠</button>
+      <button class="btn btn-primary btn-sm btn-center" style="margin:0;padding:8px 14px;font-size:12px" onclick="goTo('s-p-new')">+ Nuevo</button>
+    </div>
+  </div>
+  <div class="content">
+    <div class="stitle">Candidatos activos</div>
+    <div id="p-list-items"><div class="empty"><div class="ei">📋</div><p>No hay candidatos.<br>Toca "Nuevo" para agregar uno.</p></div></div>
+  </div>
+</div>
+
+<div id="s-p-new" class="screen">
+  <div class="topbar mod-p"><div class="tb-back" onclick="goBack()">‹</div><div class="tb-title">Nuevo candidato</div>
+    <div class="tb-right"><button onclick="goToMenu()" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:7px 10px;border-radius:9px;font-size:14px;cursor:pointer">🏠</button></div>
+  </div>
+  <div class="content">
+    <div class="ig"><label class="lbl">Nombre completo</label><input id="pn-nombre" class="inp" type="text" placeholder="Nombre completo del candidato"></div>
+    <div class="ig"><label class="lbl">Puesto al que aplica</label>
+      <select id="pn-puesto" class="inp sel"><option value="">Seleccionar...</option><option>Ayudante Matutino</option><option>Ayudante Vespertino</option><option>Ayudante Mixto</option><option>Barista</option><option>Cocinero</option><option>Cocinero en Producción</option><option>Mesero</option><option>Encargado</option></select></div>
+    <div class="ig"><label class="lbl">Turno</label>
+      <select id="pn-turno" class="inp sel"><option value="">Seleccionar...</option><option>Matutino</option><option>Vespertino</option><option>Fines de semana</option><option>Mixto</option><option>Completo</option></select></div>
+    <div class="ig"><label class="lbl">Fecha de entrevista</label><input id="pn-fecha" class="inp" type="date"></div>
+    <div class="ig"><label class="lbl">Tipo de entrevista</label>
+      <select id="pn-tipo" class="inp sel"><option value="">Seleccionar...</option><option>Empleado general</option><option>Encargado</option><option>Cocinero en producción</option><option>Cocinero</option></select></div>
+    <button class="btn btn-primary btn-center" onclick="saveCandidato()">Guardar candidato</button>
+  </div>
+</div>
+
+<div id="s-p-interview" class="screen">
+  <div class="topbar mod-p"><div class="tb-back" onclick="goBack()">‹</div><div><div class="tb-title" id="pi-name">Entrevista</div><div class="tb-sub" id="pi-tipo">—</div></div></div>
+  <div class="content">
+    <div class="card" style="background:#fff8e1;border-color:#ffca28">
+      <div style="font-size:12px;font-weight:700;color:#795548;margin-bottom:4px">GUÍA DE ENTREVISTA</div>
+      <div style="font-size:13px;color:#555;line-height:1.5">Estas son las preguntas sugeridas según el tipo de puesto. Anota las respuestas.</div>
+    </div>
+    <div id="pi-questions"></div>
+    <div class="ig" style="margin-top:16px"><label class="lbl">Notas generales de la entrevista</label><textarea id="pi-notas" class="inp" placeholder="Observaciones, actitud, puntualidad..."></textarea></div>
+    <button class="btn btn-primary btn-center" onclick="goTo('s-p-reference')">Continuar → Referencia laboral</button>
+  </div>
+</div>
+
+<div id="s-p-reference" class="screen">
+  <div class="topbar mod-p"><div class="tb-back" onclick="goBack()">‹</div><div class="tb-title">Referencia laboral</div></div>
+  <div class="content">
+    <div class="ig"><label class="lbl">Empresa anterior</label><input id="pr-empresa" class="inp" type="text" placeholder="Nombre de la empresa"></div>
+    <div class="ig"><label class="lbl">Nombre del contacto</label><input id="pr-contacto" class="inp" type="text" placeholder="Nombre del jefe / RRHH"></div>
+    <div class="ig"><label class="lbl">Teléfono</label><input id="pr-tel" class="inp" type="tel" placeholder="Número de contacto"></div>
+    <div class="ig"><label class="lbl">Motivo de baja</label><textarea id="pr-motivo" class="inp" placeholder="¿Por qué dejó de trabajar ahí?"></textarea></div>
+    <div class="ig"><label class="lbl">Calificación de desempeño (1–10)</label><input id="pr-score" class="inp" type="number" min="1" max="10" placeholder="1 – 10"></div>
+    <div class="ig"><label class="lbl">¿Lo recontratarían?</label>
+      <select id="pr-recontrata" class="inp sel"><option value="">Seleccionar...</option><option>Sí</option><option>No</option><option>Con reservas</option><option>No se pudo contactar</option></select></div>
+    <button class="btn btn-primary btn-center" onclick="goTo('s-p-decision')">Continuar → Decisión</button>
+  </div>
+</div>
+
+<div id="s-p-decision" class="screen">
+  <div class="topbar mod-p"><div class="tb-back" onclick="goBack()">‹</div><div class="tb-title">Resultado y decisión</div></div>
+  <div class="content">
+    <div class="card">
+      <div class="stitle" style="margin-top:0">Resumen</div>
+      <div id="pd-summary" style="font-size:14px;line-height:1.8;color:var(--texto)">—</div>
+    </div>
+    <div class="stitle">Decisión final</div>
+    <button class="btn btn-primary btn-center" onclick="decideCandidato('Aceptado')">✅ Aceptado — iniciar ingreso</button>
+    <button class="btn btn-light btn-center" onclick="decideCandidato('Lista de espera')">🕐 Lista de espera</button>
+    <button class="btn btn-danger btn-center" onclick="decideCandidato('No aceptado')">❌ No aceptado</button>
+    <hr style="border:none;border-top:1px solid var(--crema-dark);margin:16px 0">
+    <button class="btn btn-dark btn-center" onclick="goToMenu()">🏠 Volver al menú principal</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     INGRESO
+══════════════════════════════════════════ -->
+<div id="s-i-list" class="screen">
+  <div class="topbar mod-i"><div class="tb-back" onclick="goBack()">‹</div><div class="tb-title">Ingreso</div></div>
+  <div class="content">
+    <div class="search-wrap"><input id="i-search" class="inp" type="text" placeholder="Buscar empleado..." oninput="filterIList()"></div>
+    <div class="stitle">Empleados en ingreso</div>
+    <div id="i-list-items"><div class="empty"><div class="ei">🚪</div><p>No hay empleados en ingreso activo.</p></div></div>
+  </div>
+</div>
+
+<div id="s-i-checklist" class="screen">
+  <div class="topbar mod-i"><div class="tb-back" onclick="goBack()">‹</div><div><div class="tb-title" id="ic-name">Checklist Día 1</div><div class="tb-sub">Toca cada ítem para cambiar su estado</div></div></div>
+  <div class="content">
+    <div class="card" style="background:#e3f2fd;border-color:#90caf9;margin-bottom:16px">
+      <div style="font-size:12px;color:#1565c0;line-height:1.5">💡 Flexible: no es necesario completar todo el mismo día. Marca <strong>Pendiente</strong> si hubo imprevisto.</div>
+    </div>
+    <div id="ic-items"></div>
+    <button class="btn btn-primary btn-center" style="margin-top:8px" onclick="goTo('s-i-retro')">Registrar retroalimentación del día →</button>
+  </div>
+</div>
+
+<div id="s-i-retro" class="screen">
+  <div class="topbar mod-i"><div class="tb-back" onclick="goBack()">‹</div><div><div class="tb-title" id="ir-name">Retroalimentación</div><div class="tb-sub" id="ir-date">—</div></div></div>
+  <div class="content">
+    <div class="stitle">¿Cómo estuvo hoy? (elige uno o varios)</div>
+    <div class="tags" id="retro-tags">
+      <div class="tag" onclick="toggleTag(this,'Muy rápido')">⚡ Muy rápido</div>
+      <div class="tag" onclick="toggleTag(this,'Falta atención')">😶 Falta atención</div>
+      <div class="tag" onclick="toggleTag(this,'Muy amable')">😊 Muy amable</div>
+      <div class="tag" onclick="toggleTag(this,'Muy lento')">🐢 Muy lento</div>
+      <div class="tag" onclick="toggleTag(this,'Rebelde')">😤 Rebelde</div>
+      <div class="tag" onclick="toggleTag(this,'Bien')">👍 Bien</div>
+      <div class="tag" onclick="toggleTag(this,'Motivado')">🔥 Motivado</div>
+      <div class="tag" onclick="toggleTag(this,'Confundido')">🤔 Confundido</div>
+    </div>
+    <div class="ig"><label class="lbl">Observaciones</label><textarea id="retro-notas" class="inp" placeholder="Detalla lo que pasó, errores, logros..."></textarea></div>
+    <button class="btn btn-primary btn-center" onclick="saveRetro()">Guardar retroalimentación</button>
+  </div>
+</div>
+
+<div id="s-i-summary" class="screen">
+  <div class="topbar mod-i"><div class="tb-back" onclick="goBack()">‹</div><div class="tb-title" id="is-name">Resumen ingreso</div></div>
+  <div class="content">
+    <div class="card">
+      <div id="is-prog-label" style="font-size:13px;color:var(--gris);margin-bottom:4px">Checklist día 1</div>
+      <div class="prog-bar"><div class="prog-fill" id="is-prog-fill" style="width:0%"></div></div>
+      <div id="is-prog-pct" style="font-size:12px;color:var(--gris)">0 de 10 completados</div>
+    </div>
+    <div class="stitle">Retroalimentaciones</div>
+    <div id="is-retros"></div>
+    <button class="btn btn-primary btn-center" onclick="goTo('s-i-checklist')">Continuar checklist →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CAPACITAR
+══════════════════════════════════════════ -->
+<div id="s-c-list" class="screen">
+  <div class="topbar mod-c"><div class="tb-back" onclick="goBack()">‹</div><div class="tb-title">Capacitar</div></div>
+  <div class="content">
+    <div class="search-wrap"><input id="c-search" class="inp" type="text" placeholder="Buscar empleado..." oninput="filterCList()"></div>
+    <div class="stitle">Selecciona empleado</div>
+    <div id="c-list-items"></div>
+  </div>
+</div>
+
+<div id="s-c-progress" class="screen">
+  <div class="topbar mod-c"><div class="tb-back" onclick="goBack()">‹</div><div><div class="tb-title" id="cp-name">Progreso</div><div class="tb-sub" id="cp-role">—</div></div></div>
+  <div class="content">
+    <div class="card">
+      <div style="font-size:13px;color:var(--gris);margin-bottom:4px">Avance total</div>
+      <div class="prog-bar"><div class="prog-fill" id="cp-total-bar" style="width:0%"></div></div>
+      <div id="cp-total-txt" style="font-size:12px;color:var(--gris)">Calculando...</div>
+    </div>
+    <div class="stitle">Por categoría</div>
+    <div id="cp-cats"></div>
+    <button class="btn btn-primary btn-center" onclick="goTo('s-c-search')">+ Registrar artículo →</button>
+  </div>
+</div>
+
+<div id="s-c-search" class="screen">
+  <div class="topbar mod-c"><div class="tb-back" onclick="goBack()">‹</div><div class="tb-title" id="cs-emp-name">Buscar artículo</div></div>
+  <div class="content">
+    <div class="search-wrap"><input id="cs-search" class="inp" type="text" placeholder="Escribe el nombre del artículo..." oninput="filterArticulos()"></div>
+    <div id="cs-filter-cats" class="tags"></div>
+    <div class="stitle">Artículos</div>
+    <div id="cs-items"></div>
+  </div>
+</div>
+
+<div id="s-c-article" class="screen">
+  <div class="topbar mod-c"><div class="tb-back" onclick="goBack()">‹</div><div class="tb-title" id="ca-name">Artículo</div></div>
+  <div class="content">
+    <div id="ca-estado" style="margin-bottom:14px"></div>
+    <div class="card">
+      <div class="stitle" style="margin-top:0">Ingredientes</div>
+      <div id="ca-ingr"></div>
+    </div>
+    <div class="card">
+      <div class="stitle" style="margin-top:0">Procedimiento</div>
+      <div id="ca-pasos"></div>
+    </div>
+    <button class="btn btn-primary btn-center" onclick="goTo('s-c-register')">Registrar avance →</button>
+  </div>
+</div>
+
+<div id="s-c-register" class="screen">
+  <div class="topbar mod-c"><div class="tb-back" onclick="goBack()">‹</div><div><div class="tb-title" id="cr-art-name">Registrar avance</div><div class="tb-sub" id="cr-emp-name">—</div></div></div>
+  <div class="content">
+    <div class="stitle">Estado actual</div>
+    <button id="cr-vista" class="btn btn-light" onclick="selectAvance('Vista')">👁️ Vista por primera vez</button>
+    <button id="cr-practicado" class="btn btn-light" onclick="selectAvance('Practicado')">🔄 Practicado (con ayuda)</button>
+    <button id="cr-dominado" class="btn btn-light" onclick="selectAvance('Dominado')">⭐ Dominado (solo)</button>
+    <div class="ig" style="margin-top:6px"><label class="lbl">Comentarios / errores observados</label><textarea id="cr-notas" class="inp" placeholder="Opcional..."></textarea></div>
+    <button class="btn btn-dark btn-center" onclick="saveAvance()">Guardar</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     EVALUAR
+══════════════════════════════════════════ -->
+<div id="s-e-list" class="screen">
+  <div class="topbar mod-e"><div class="tb-back" onclick="goBack()">‹</div><div class="tb-title">Evaluar</div></div>
+  <div class="content">
+    <div class="search-wrap"><input id="e-search" class="inp" type="text" placeholder="Buscar empleado..." oninput="filterEList()"></div>
+    <div class="stitle">Selecciona empleado</div>
+    <div id="e-list-items"></div>
+  </div>
+</div>
+
+<div id="s-e-article" class="screen">
+  <div class="topbar mod-e"><div class="tb-back" onclick="goBack()">‹</div><div><div class="tb-title" id="ea-emp-name">Evaluar</div><div class="tb-sub">Selecciona artículo</div></div></div>
+  <div class="content">
+    <div id="ea-sugeridos" style="margin-bottom:6px"></div>
+    <div class="search-wrap"><input id="ea-search" class="inp" type="text" placeholder="O busca artículo..." oninput="filterEArticulos()"></div>
+    <div id="ea-items"></div>
+  </div>
+</div>
+
+<div id="s-e-eval" class="screen">
+  <div class="topbar mod-e"><div class="tb-back" onclick="goBack()">‹</div><div><div class="tb-title" id="ee-art-name">Evaluación</div><div class="tb-sub" id="ee-emp-name">—</div></div></div>
+  <div class="content">
+    <div class="stitle">Evalúa cada criterio</div>
+    <div class="ev-item"><div class="ev-lbl">Ingredientes correctos</div>
+      <div class="tg-group"><button class="tg" id="ev-ing-y" onclick="setEval('ing',true)">✅</button><button class="tg" id="ev-ing-n" onclick="setEval('ing',false)">❌</button></div></div>
+    <div class="ev-item"><div class="ev-lbl">Procedimiento correcto</div>
+      <div class="tg-group"><button class="tg" id="ev-pro-y" onclick="setEval('pro',true)">✅</button><button class="tg" id="ev-pro-n" onclick="setEval('pro',false)">❌</button></div></div>
+    <div class="ev-item"><div class="ev-lbl">Estética / presentación</div>
+      <div class="tg-group"><button class="tg" id="ev-est-y" onclick="setEval('est',true)">✅</button><button class="tg" id="ev-est-n" onclick="setEval('est',false)">❌</button></div></div>
+    <div class="ev-item"><div class="ev-lbl">Tiempo adecuado</div>
+      <div class="tg-group"><button class="tg" id="ev-tie-y" onclick="setEval('tie',true)">✅</button><button class="tg" id="ev-tie-n" onclick="setEval('tie',false)">❌</button></div></div>
+    <div class="ig" style="margin-top:6px"><label class="lbl">Notas</label><textarea id="ev-notas" class="inp" placeholder="Errores específicos, recomendaciones..."></textarea></div>
+    <button class="btn btn-primary btn-center" onclick="saveEvaluacion()">Guardar evaluación</button>
+    <button class="btn btn-ghost btn-center" style="margin-top:4px" onclick="goTo('s-e-history')">Ver historial completo</button>
+  </div>
+</div>
+
+<div id="s-e-history" class="screen">
+  <div class="topbar mod-e"><div class="tb-back" onclick="goBack()">‹</div><div class="tb-title" id="eh-name">Historial</div></div>
+  <div class="content">
+    <div id="eh-items"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     MEJORA CONTINUA
+══════════════════════════════════════════ -->
+<div id="s-mc-search" class="screen">
+  <div class="topbar mod-mc"><div class="tb-back" onclick="goBack()">‹</div><div class="tb-title">Mejora Continua</div></div>
+  <div class="content">
+    <div class="search-wrap"><input id="mc-search" class="inp" type="text" placeholder="¿Qué pasa si...? ¿Cómo hago...?" oninput="searchDudas()"></div>
+    <div class="stitle">Respuestas disponibles</div>
+    <div id="mc-results"></div>
+    <div style="text-align:center;margin-top:20px">
+      <button class="btn btn-ghost btn-center" onclick="goTo('s-mc-new')">No encuentro lo que busco →</button>
+    </div>
+  </div>
+</div>
+
+<div id="s-mc-answer" class="screen">
+  <div class="topbar mod-mc"><div class="tb-back" onclick="goBack()">‹</div><div class="tb-title">Respuesta</div></div>
+  <div class="content">
+    <div class="card" style="background:#fff8e1;border-color:#ffca28">
+      <div style="font-size:11px;font-weight:700;color:#795548;margin-bottom:5px">PREGUNTA</div>
+      <div id="mca-question" style="font-size:15px;font-weight:600;line-height:1.4;color:var(--texto)">—</div>
+    </div>
+    <div class="card">
+      <div style="font-size:11px;font-weight:700;color:var(--gris);margin-bottom:8px">RESPUESTA</div>
+      <div id="mca-answer" style="font-size:14px;line-height:1.7;color:var(--texto)">—</div>
+    </div>
+    <button class="btn btn-light btn-center" onclick="goTo('s-mc-search')">← Hacer otra pregunta</button>
+  </div>
+</div>
+
+<div id="s-mc-new" class="screen">
+  <div class="topbar mod-mc"><div class="tb-back" onclick="goBack()">‹</div><div class="tb-title">Pregunta nueva</div></div>
+  <div class="content">
+    <div class="card" style="background:#fce4ec;border-color:#ef9a9a">
+      <div style="font-size:13px;color:#c62828;line-height:1.5">No encontramos respuesta a esta pregunta. Se enviará a Ari para que la responda. Mientras tanto, puedes llamarle directamente.</div>
+    </div>
+    <div class="ig"><label class="lbl">Escribe tu pregunta</label><textarea id="mc-new-q" class="inp" placeholder="Describe la situación con detalle..."></textarea></div>
+    <button class="btn btn-primary btn-center" onclick="saveDuda()">Enviar para que Ari la responda</button>
+    <div style="text-align:center;margin:16px 0 4px;font-size:13px;color:var(--gris)">— o si es urgente —</div>
+    <a href="tel:4443426482" class="call-btn">📞 Llamar a Ari · 4443426482</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+// ════════════════════════════════════════════
+// CONFIG — reemplaza con tu URL de Apps Script
+// ════════════════════════════════════════════
+const API = 'https://script.google.com/macros/s/AKfycbzAUkI7BpRXFRYHnADKqHmeChKdzp9yB3kZT9pKZorGOyBAWb5J0tXWk_zmC6c8au_t/exec';
+
+// ════════════════════════════════════════════
+// ESTADO GLOBAL
+// ════════════════════════════════════════════
+const S = {
+  supervisor: null,
+  history: ['s-login'],
+  empleados: [],
+  articulos: [],
+  candidatos: [],
+  currentEmp: null,
+  currentCand: null,
+  currentArt: null,
+  progresoEmp: [],
+  evalState: { ing: null, pro: null, est: null, tie: null },
+  avanceSelected: null,
+  checklist: [],
+};
+
+// Checklist día 1 — ítems fijos
+const CHECKLIST_ITEMS = [
+  { id: 'CI-01', label: 'Reglamentación y explicación de roles' },
+  { id: 'CI-02', label: 'Tour e historia de Chatello' },
+  { id: 'CI-03', label: 'Agregar usuario a punto de venta' },
+  { id: 'CI-04', label: 'Presentar a compañeros y entregar uniforme' },
+  { id: 'CI-05', label: 'Explicar descansos, permisos de baño y celular' },
+  { id: 'CI-06', label: 'Explicar descuentos de empleado' },
+  { id: 'CI-07', label: 'Envío link de registro en Google Forms' },
+  { id: 'CI-08', label: 'Firma de carta compromiso (si es menor de edad)' },
+  { id: 'CI-09', label: 'Explicación de artículos y menú' },
+  { id: 'CI-10', label: 'Explicación de tabla de cambios de turno y acciones diarias' },
+];
+
+// Preguntas por tipo de entrevista
+const INTERVIEW_Q = {
+  'Empleado general': ['¿Por qué te interesa trabajar en Chatello?','¿Tienes experiencia en servicio al cliente?','¿Cómo manejas situaciones de estrés?','¿Cuál es tu disponibilidad de horario?','¿Tienes alguna limitación física que debamos considerar?'],
+  'Encargado': ['¿Tienes experiencia manejando equipos de trabajo?','¿Cómo resuelves conflictos entre compañeros?','¿Cómo priorizas tareas en momento de alto tráfico?','¿Qué harías si un empleado no sigue el reglamento?','¿Tienes experiencia en manejo de caja y cierres?'],
+  'Cocinero en producción': ['¿Qué experiencia tienes en producción de alimentos?','¿Conoces normas básicas de higiene en cocina?','¿Puedes trabajar bajo presión de tiempo?','¿Tienes experiencia con equipos industriales?','¿Cuál es tu fortaleza en cocina?'],
+  'Cocinero': ['¿Cuál es tu experiencia en cocina profesional?','¿Conoces los estándares de higiene y manejo de alimentos?','¿Has trabajado con recetas estandarizadas?','¿Cómo garantizas consistencia en la presentación?','¿Qué haces si se acaba un ingrediente durante el servicio?'],
+};
+
+// ════════════════════════════════════════════
+// NAVEGACIÓN
+// ════════════════════════════════════════════
+function goTo(screenId, skipLoad) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+  S.history.push(screenId);
+  if (!skipLoad) loadScreen(screenId);
+  window.scrollTo(0,0);
+}
+
+function goBack() {
+  if (S.history.length > 1) S.history.pop();
+  const prev = S.history[S.history.length - 1];
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(prev).classList.add('active');
+  loadScreen(prev);
+  window.scrollTo(0,0);
+}
+
+function goToMenu() {
+  S.history = ['s-menu'];
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('s-menu').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function clearPNew() {
+  document.getElementById('pn-nombre').value = '';
+  document.getElementById('pn-puesto').value = '';
+  document.getElementById('pn-turno').value = '';
+  document.getElementById('pn-fecha').value = '';
+  document.getElementById('pn-tipo').value = '';
+  S.currentCand = null;
+}
+
+function loadScreen(id) {
+  switch(id) {
+    case 's-p-new': clearPNew(); break;
+    case 's-p-list': loadPList(); break;
+    case 's-i-list': loadIList(); break;
+    case 's-i-checklist': loadChecklist(); break;
+    case 's-i-summary': loadISummary(); break;
+    case 's-c-list': loadCList(); break;
+    case 's-c-progress': loadCProgress(); break;
+    case 's-c-search': loadCSearch(); break;
+    case 's-e-list': loadEList(); break;
+    case 's-e-article': loadEArticle(); break;
+    case 's-e-history': loadEHistory(); break;
+    case 's-mc-search': loadDudas(); break;
+    case 's-p-decision': loadPDecision(); break;
+    case 's-p-interview': loadPInterview(); break;
+    case 's-i-retro': loadIRetro(); break;
+  }
+}
+
+// ════════════════════════════════════════════
+// API
+// ════════════════════════════════════════════
+async function apiGet(params) {
+  const url = API + '?' + new URLSearchParams(params);
+  const res = await fetch(url);
+  return res.json();
+}
+async function apiPost(data) {
+  const res = await fetch(API, { method: 'POST', body: JSON.stringify(data) });
+  return res.json();
+}
+
+function loading(txt) { document.getElementById('ld').style.display='flex'; document.getElementById('ld-txt').textContent = txt||'Cargando...'; }
+function doneLoading() { document.getElementById('ld').style.display='none'; }
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ════════════════════════════════════════════
+// LOGIN
+// ════════════════════════════════════════════
+let pinVal = '';
+function pinKey(k) {
+  if (pinVal.length >= 4) return;
+  pinVal += k;
+  updatePinDots();
+  if (pinVal.length === 4) setTimeout(doLogin, 200);
+}
+function pinBack() { pinVal = pinVal.slice(0,-1); updatePinDots(); document.getElementById('pin-err').textContent = ''; }
+function updatePinDots() {
+  for(let i=0;i<4;i++) document.getElementById('d'+i).classList.toggle('f', i < pinVal.length);
+}
+async function doLogin() {
+  loading('Verificando...');
+  try {
+    const r = await apiGet({ action:'login', pin: pinVal });
+    doneLoading();
+    if (r.ok) {
+      S.supervisor = r;
+      document.getElementById('menu-name').textContent = r.nombre;
+      // Pre-cargar empleados y artículos
+      loading('Cargando datos...');
+      const [emps, arts] = await Promise.all([
+        apiGet({action:'getEmpleados'}),
+        apiGet({action:'getArticulos'})
+      ]);
+      S.empleados = emps || [];
+      S.articulos = arts || [];
+      doneLoading();
+      goTo('s-menu', true);
+      pinVal = ''; updatePinDots();
+    } else {
+      document.getElementById('pin-err').textContent = 'PIN incorrecto';
+      pinVal = ''; updatePinDots();
+    }
+  } catch(e) {
+    doneLoading();
+    document.getElementById('pin-err').textContent = 'Sin conexión. Verifica tu internet.';
+    pinVal = ''; updatePinDots();
+  }
+}
+function logout() { S.supervisor = null; S.history = ['s-login']; goTo('s-login', true); }
+
+// ════════════════════════════════════════════
+// POSTULACIÓN
+// ════════════════════════════════════════════
+async function loadPList() {
+  loading('Cargando candidatos...');
+  const cands = await apiGet({action:'getCandidatos'});
+  S.candidatos = cands || [];
+  doneLoading();
+  renderPList(S.candidatos);
+}
+function renderPList(list) {
+  const el = document.getElementById('p-list-items');
+  if (!list.length) { el.innerHTML = '<div class="empty"><div class="ei">📋</div><p>No hay candidatos.</p></div>'; return; }
+  el.innerHTML = list.map(c => {
+    const bdg = c.ESTATUS === 'Aceptado' ? 'bdg-ok' : c.ESTATUS === 'No aceptado' ? 'bdg-err' : 'bdg-warn';
+    return `<div class="li" onclick="selectCandidato('${c.CAND_ID}')">
+      <div class="li-left"><div class="li-name">${c.NOMBRE}</div><div class="li-sub">${c.PUESTO||'—'} · ${c.FECHA_ENTREVISTA||'Sin fecha'}</div></div>
+      <span class="bdg ${bdg}">${c.ESTATUS||'Pendiente'}</span>
+    </div>`;
+  }).join('');
+}
+function selectCandidato(id) {
+  S.currentCand = S.candidatos.find(c => c.CAND_ID === id);
+  goTo('s-p-interview');
+}
+function loadPInterview() {
+  if (!S.currentCand) return;
+  document.getElementById('pi-name').textContent = S.currentCand.NOMBRE;
+  document.getElementById('pi-tipo').textContent = S.currentCand.TIPO_ENTREVISTA || 'Entrevista general';
+  const qs = INTERVIEW_Q[S.currentCand.TIPO_ENTREVISTA] || INTERVIEW_Q['Empleado general'];
+  document.getElementById('pi-questions').innerHTML = qs.map((q,i) =>
+    `<div class="ig"><label class="lbl">Pregunta ${i+1}</label>
+     <div style="font-size:14px;font-weight:600;color:var(--texto);margin-bottom:6px;line-height:1.4">${q}</div>
+     <textarea class="inp" id="piq-${i}" placeholder="Respuesta del candidato..."></textarea></div>`
+  ).join('');
+}
+async function saveCandidato() {
+  const nombre = document.getElementById('pn-nombre').value.trim();
+  const puesto = document.getElementById('pn-puesto').value;
+  const turno = document.getElementById('pn-turno').value;
+  const fecha = document.getElementById('pn-fecha').value;
+  const tipo = document.getElementById('pn-tipo').value;
+  if (!nombre || !puesto) { toast('Falta nombre o puesto'); return; }
+  loading('Guardando...');
+  const r = await apiPost({ action:'saveCandidato', nombre, puesto, turno, fechaEntrevista: fecha, tipoEntrevista: tipo, supervisor: S.supervisor?.nombre });
+  doneLoading();
+  if (r.ok) { S.currentCand = { CAND_ID: r.candId, NOMBRE: nombre, PUESTO: puesto, TURNO: turno, TIPO_ENTREVISTA: tipo }; toast('Candidato guardado ✓'); goTo('s-p-interview'); }
+  else toast('Error al guardar');
+}
+function loadPDecision() {
+  if (!S.currentCand) return;
+  document.getElementById('pd-summary').innerHTML = `
+    <div>👤 <strong>${S.currentCand.NOMBRE}</strong></div>
+    <div>💼 ${S.currentCand.PUESTO||'—'} · ${S.currentCand.TURNO||'—'}</div>
+    <div>📅 Entrevista: ${S.currentCand.FECHA_ENTREVISTA||'—'}</div>
+    <div>📋 Tipo: ${S.currentCand.TIPO_ENTREVISTA||'—'}</div>`;
+}
+async function decideCandidato(decision) {
+  loading('Guardando decisión...');
+  const r = await apiPost({ action:'saveEntrevista', candId: S.currentCand.CAND_ID, nombre: S.currentCand.NOMBRE, puesto: S.currentCand.PUESTO, turno: S.currentCand.TURNO, decision, supervisor: S.supervisor?.nombre });
+  doneLoading();
+  if (r.ok) {
+    toast(decision === 'Aceptado' ? '✅ Aceptado — empleado creado' : 'Decisión guardada');
+    if (decision === 'Aceptado') {
+      const emps = await apiGet({action:'getEmpleados'});
+      S.empleados = emps || [];
+    }
+    goToMenu();
+  } else toast('Error al guardar');
+}
+
+// ════════════════════════════════════════════
+// INGRESO
+// ════════════════════════════════════════════
+async function loadIList() {
+  const el = document.getElementById('i-list-items');
+  const activos = S.empleados.filter(e => e.ESTATUS === 'Activo');
+  if (!activos.length) { el.innerHTML = '<div class="empty"><div class="ei">🚪</div><p>No hay empleados activos.</p></div>'; return; }
+  el.innerHTML = activos.map(e =>
+    `<div class="li" onclick="selectEmpIngreso('${e.EMP_ID}')">
+      <div class="li-left"><div class="li-name">${e.NOMBRE}</div><div class="li-sub">${e.PUESTO||'—'} · Ingreso: ${e.FECHA_INGRESO||'—'}</div></div>
+      <span style="color:var(--gris)">›</span>
+    </div>`
+  ).join('');
+}
+function filterIList() {
+  const q = document.getElementById('i-search').value.toLowerCase();
+  renderIList(S.empleados.filter(e => e.NOMBRE.toLowerCase().includes(q)));
+}
+function renderIList(list) {
+  const el = document.getElementById('i-list-items');
+  el.innerHTML = list.filter(e=>e.ESTATUS==='Activo').map(e =>
+    `<div class="li" onclick="selectEmpIngreso('${e.EMP_ID}')">
+      <div class="li-left"><div class="li-name">${e.NOMBRE}</div><div class="li-sub">${e.PUESTO||'—'}</div></div>
+      <span style="color:var(--gris)">›</span>
+    </div>`
+  ).join('');
+}
+async function selectEmpIngreso(id) {
+  S.currentEmp = S.empleados.find(e => e.EMP_ID === id);
+  loading('Cargando checklist...');
+  const cl = await apiGet({ action:'getChecklist', empId: id });
+  S.checklist = cl || [];
+  const retros = await apiGet({ action:'getRetros', empId: id });
+  S.retros = retros || [];
+  doneLoading();
+  goTo('s-i-checklist', true);
+  loadChecklist();
+}
+function loadChecklist() {
+  if (!S.currentEmp) return;
+  document.getElementById('ic-name').textContent = S.currentEmp.NOMBRE;
+  document.getElementById('ic-items').innerHTML = CHECKLIST_ITEMS.map(item => {
+    const saved = S.checklist.find(c => c.ITEM === item.id);
+    const estado = saved ? saved.ESTADO : '';
+    return `<div class="ci">
+      <div class="ci-title">${item.label}</div>
+      <div class="ci-states">
+        <button class="csb ${estado==='Listo'?'s-done':''}" onclick="setChecklist('${item.id}','Listo',this)">✅ Listo</button>
+        <button class="csb ${estado==='Pendiente'?'s-pend':''}" onclick="setChecklist('${item.id}','Pendiente',this)">⏳ Pendiente</button>
+        <button class="csb ${estado==='N/A'?'s-na':''}" onclick="setChecklist('${item.id}','N/A',this)">N/A</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+async function setChecklist(itemId, estado, btn) {
+  const siblings = btn.closest('.ci-states').querySelectorAll('.csb');
+  siblings.forEach(b => b.className = 'csb');
+  if (estado==='Listo') btn.className='csb s-done';
+  else if (estado==='Pendiente') btn.className='csb s-pend';
+  else btn.className='csb s-na';
+  await apiPost({ action:'saveChecklist', empId: S.currentEmp.EMP_ID, item: itemId, estado, supervisor: S.supervisor?.nombre });
+  const idx = S.checklist.findIndex(c => c.ITEM === itemId);
+  if (idx>=0) S.checklist[idx].ESTADO = estado; else S.checklist.push({ITEM:itemId,ESTADO:estado});
+}
+function loadIRetro() {
+  if (!S.currentEmp) return;
+  document.getElementById('ir-name').textContent = S.currentEmp.NOMBRE;
+  document.getElementById('ir-date').textContent = new Date().toLocaleDateString('es-MX',{weekday:'long',day:'numeric',month:'long'});
+  document.querySelectorAll('#retro-tags .tag').forEach(t => t.classList.remove('sel'));
+  document.getElementById('retro-notas').value = '';
+}
+function toggleTag(el, val) { el.classList.toggle('sel'); }
+async function saveRetro() {
+  const tags = [...document.querySelectorAll('#retro-tags .tag.sel')].map(t => t.textContent.trim());
+  const notas = document.getElementById('retro-notas').value;
+  if (!tags.length && !notas) { toast('Agrega al menos una etiqueta u observación'); return; }
+  loading('Guardando...');
+  await apiPost({ action:'saveRetro', empId: S.currentEmp.EMP_ID, tags, notas, supervisor: S.supervisor?.nombre });
+  doneLoading();
+  toast('Retroalimentación guardada ✓');
+  goBack();
+}
+function loadISummary() {
+  if (!S.currentEmp) return;
+  document.getElementById('is-name').textContent = S.currentEmp.NOMBRE;
+  const done = S.checklist.filter(c => c.ESTADO === 'Listo').length;
+  const pct = Math.round((done / CHECKLIST_ITEMS.length) * 100);
+  document.getElementById('is-prog-fill').style.width = pct + '%';
+  document.getElementById('is-prog-pct').textContent = `${done} de ${CHECKLIST_ITEMS.length} completados`;
+  const retrosEl = document.getElementById('is-retros');
+  if (!S.retros || !S.retros.length) { retrosEl.innerHTML = '<div class="empty" style="padding:20px"><p>Sin retroalimentaciones aún.</p></div>'; return; }
+  retrosEl.innerHTML = (S.retros || []).map(r => {
+    let tags = [];
+    try { tags = JSON.parse(r.TAGS); } catch(e) {}
+    return `<div class="card"><div style="font-size:12px;color:var(--gris);margin-bottom:5px">${r.FECHA}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:${r.NOTAS?'8px':'0'}">${tags.map(t=>`<span class="bdg bdg-neu">${t}</span>`).join('')}</div>
+      ${r.NOTAS?`<div style="font-size:13px;color:var(--texto)">${r.NOTAS}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+// ════════════════════════════════════════════
+// CAPACITAR
+// ════════════════════════════════════════════
+async function loadCList() {
+  const activos = S.empleados.filter(e => e.ESTATUS === 'Activo');
+  document.getElementById('c-list-items').innerHTML = activos.map(e =>
+    `<div class="li" onclick="selectEmpCapacitar('${e.EMP_ID}')">
+      <div class="li-left"><div class="li-name">${e.NOMBRE}</div><div class="li-sub">${e.PUESTO||'—'} · ${e.TURNO||'—'}</div></div>
+      <span style="color:var(--gris)">›</span>
+    </div>`
+  ).join('') || '<div class="empty"><div class="ei">📚</div><p>Sin empleados activos.</p></div>';
+}
+function filterCList() {
+  const q = document.getElementById('c-search').value.toLowerCase();
+  document.getElementById('c-list-items').innerHTML = S.empleados.filter(e=>e.ESTATUS==='Activo'&&e.NOMBRE.toLowerCase().includes(q)).map(e =>
+    `<div class="li" onclick="selectEmpCapacitar('${e.EMP_ID}')">
+      <div class="li-left"><div class="li-name">${e.NOMBRE}</div><div class="li-sub">${e.PUESTO||'—'}</div></div>
+      <span style="color:var(--gris)">›</span>
+    </div>`
+  ).join('');
+}
+async function selectEmpCapacitar(id) {
+  S.currentEmp = S.empleados.find(e => e.EMP_ID === id);
+  loading('Cargando progreso...');
+  const [prog, arts] = await Promise.all([
+    apiGet({ action:'getProgreso', empId: id }),
+    apiGet({ action:'getArticulos', rol: S.currentEmp.PUESTO })
+  ]);
+  S.progresoEmp = prog || [];
+  S.articulosEmp = arts || [];
+  doneLoading();
+  goTo('s-c-progress', true);
+  loadCProgress();
+}
+function loadCProgress() {
+  if (!S.currentEmp) return;
+  document.getElementById('cp-name').textContent = S.currentEmp.NOMBRE;
+  document.getElementById('cp-role').textContent = S.currentEmp.PUESTO || '—';
+  const total = S.articulosEmp?.length || 0;
+  const dom = S.progresoEmp.filter(p => p.ESTADO === 'Dominado').length;
+  const pct = total ? Math.round((dom/total)*100) : 0;
+  document.getElementById('cp-total-bar').style.width = pct + '%';
+  document.getElementById('cp-total-txt').textContent = `${dom} de ${total} artículos dominados (${pct}%)`;
+  // Por categoría
+  const cats = {};
+  (S.articulosEmp||[]).forEach(a => { if(!cats[a.CATEGORIA]) cats[a.CATEGORIA]={total:0,dom:0}; cats[a.CATEGORIA].total++; });
+  S.progresoEmp.filter(p=>p.ESTADO==='Dominado').forEach(p => { const a=S.articulosEmp?.find(x=>x.ART_ID===p.ART_ID); if(a&&cats[a.CATEGORIA]) cats[a.CATEGORIA].dom++; });
+  document.getElementById('cp-cats').innerHTML = Object.entries(cats).map(([cat,v]) => {
+    const pct = Math.round((v.dom/v.total)*100);
+    return `<div class="card" style="padding:12px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+        <span style="font-size:13px;font-weight:600">${cat}</span>
+        <span style="font-size:12px;color:var(--gris)">${v.dom}/${v.total}</span>
+      </div>
+      <div class="prog-bar" style="margin:0"><div class="prog-fill" style="width:${pct}%"></div></div>
+    </div>`;
+  }).join('');
+}
+function loadCSearch() {
+  if (!S.currentEmp) return;
+  document.getElementById('cs-emp-name').textContent = S.currentEmp.NOMBRE;
+  const cats = [...new Set((S.articulosEmp||S.articulos).map(a=>a.CATEGORIA).filter(Boolean))];
+  document.getElementById('cs-filter-cats').innerHTML = cats.map(c =>
+    `<div class="tag" onclick="toggleTag(this,'${c}')">${c}</div>`).join('');
+  renderCSearch(S.articulosEmp || S.articulos);
+}
+function filterArticulos() {
+  const q = document.getElementById('cs-search').value.toLowerCase();
+  const cats = [...document.querySelectorAll('#cs-filter-cats .tag.sel')].map(t=>t.dataset.val||t.textContent.trim());
+  let list = (S.articulosEmp || S.articulos).filter(a => a.NOMBRE.toLowerCase().includes(q));
+  if (cats.length) list = list.filter(a => cats.includes(a.CATEGORIA));
+  renderCSearch(list);
+}
+function renderCSearch(list) {
+  document.getElementById('cs-items').innerHTML = list.map(a => {
+    const prog = S.progresoEmp.find(p=>p.ART_ID===a.ART_ID);
+    const est = prog?.ESTADO;
+    const bdgCls = est==='Dominado'?'bdg-ok':est==='Practicado'?'bdg-warn':est==='Vista'?'bdg-pur':'bdg-neu';
+    return `<div class="li" onclick="selectArticulo('${a.ART_ID}')">
+      <div class="li-left"><div class="li-name">${a.NOMBRE}</div><div class="li-sub">${a.CATEGORIA||'—'}</div></div>
+      <span class="bdg ${bdgCls}">${est||'Sin ver'}</span>
+    </div>`;
+  }).join('') || '<div class="empty"><p>Sin resultados.</p></div>';
+}
+function selectArticulo(id) {
+  S.currentArt = (S.articulosEmp||S.articulos).find(a => a.ART_ID === id);
+  goTo('s-c-article', true);
+  loadCArticle();
+}
+function loadCArticle() {
+  if (!S.currentArt) return;
+  document.getElementById('ca-name').textContent = S.currentArt.NOMBRE;
+  const prog = S.progresoEmp.find(p=>p.ART_ID===S.currentArt.ART_ID);
+  const est = prog?.ESTADO;
+  document.getElementById('ca-estado').innerHTML = est
+    ? `<div style="text-align:center"><span class="bdg ${est==='Dominado'?'bdg-ok':est==='Practicado'?'bdg-warn':'bdg-pur'}" style="font-size:13px;padding:6px 14px">${est}</span></div>`
+    : '<div style="text-align:center"><span class="bdg bdg-neu" style="font-size:13px;padding:6px 14px">Sin ver aún</span></div>';
+  const ingr = Array.isArray(S.currentArt.INGREDIENTES) ? S.currentArt.INGREDIENTES : [];
+  document.getElementById('ca-ingr').innerHTML = ingr.length
+    ? ingr.map(i=>`<div class="ingr-item">• ${i}</div>`).join('')
+    : '<div style="color:var(--gris);font-size:13px">Sin ingredientes registrados</div>';
+  const pasos = Array.isArray(S.currentArt.PASOS) ? S.currentArt.PASOS : [];
+  document.getElementById('ca-pasos').innerHTML = pasos.length
+    ? pasos.map((p,i)=>`<div class="art-step"><div class="step-n">${i+1}</div><div>${p}</div></div>`).join('')
+    : '<div style="color:var(--gris);font-size:13px">Sin pasos registrados</div>';
+}
+function selectAvance(estado) {
+  S.avanceSelected = estado;
+  ['vista','practicado','dominado'].forEach(k => {
+    const btn = document.getElementById('cr-'+k);
+    btn.className = 'btn btn-light';
+    if (k === estado.toLowerCase()) btn.className = 'btn btn-primary';
+  });
+}
+async function saveAvance() {
+  if (!S.avanceSelected) { toast('Selecciona el estado primero'); return; }
+  loading('Guardando...');
+  await apiPost({ action:'saveAvance', empId: S.currentEmp.EMP_ID, artId: S.currentArt.ART_ID, estado: S.avanceSelected, notas: document.getElementById('cr-notas').value, supervisor: S.supervisor?.nombre });
+  doneLoading();
+  toast('Avance guardado ✓');
+  // Actualizar progreso local
+  const idx = S.progresoEmp.findIndex(p=>p.ART_ID===S.currentArt.ART_ID);
+  if (idx>=0) S.progresoEmp[idx].ESTADO = S.avanceSelected; else S.progresoEmp.push({ART_ID:S.currentArt.ART_ID,ESTADO:S.avanceSelected});
+  S.avanceSelected = null;
+  document.getElementById('cr-notas').value = '';
+  goBack();
+}
+function loadCRegister() {
+  if (!S.currentArt || !S.currentEmp) return;
+  document.getElementById('cr-art-name').textContent = S.currentArt.NOMBRE;
+  document.getElementById('cr-emp-name').textContent = S.currentEmp.NOMBRE;
+  ['vista','practicado','dominado'].forEach(k => document.getElementById('cr-'+k).className = 'btn btn-light');
+  S.avanceSelected = null;
+}
+
+// ════════════════════════════════════════════
+// EVALUAR
+// ════════════════════════════════════════════
+async function loadEList() {
+  const activos = S.empleados.filter(e => e.ESTATUS === 'Activo');
+  document.getElementById('e-list-items').innerHTML = activos.map(e =>
+    `<div class="li" onclick="selectEmpEvaluar('${e.EMP_ID}')">
+      <div class="li-left"><div class="li-name">${e.NOMBRE}</div><div class="li-sub">${e.PUESTO||'—'}</div></div>
+      <span style="color:var(--gris)">›</span>
+    </div>`
+  ).join('');
+}
+function filterEList() {
+  const q = document.getElementById('e-search').value.toLowerCase();
+  document.getElementById('e-list-items').innerHTML = S.empleados.filter(e=>e.ESTATUS==='Activo'&&e.NOMBRE.toLowerCase().includes(q)).map(e =>
+    `<div class="li" onclick="selectEmpEvaluar('${e.EMP_ID}')">
+      <div class="li-left"><div class="li-name">${e.NOMBRE}</div><div class="li-sub">${e.PUESTO||'—'}</div></div>
+      <span style="color:var(--gris)">›</span>
+    </div>`
+  ).join('');
+}
+async function selectEmpEvaluar(id) {
+  S.currentEmp = S.empleados.find(e=>e.EMP_ID===id);
+  loading('Cargando...');
+  const [evals, arts] = await Promise.all([
+    apiGet({action:'getEvaluaciones', empId: id}),
+    apiGet({action:'getArticulos', rol: S.currentEmp.PUESTO})
+  ]);
+  S.evaluaciones = evals || [];
+  S.articulosEmp = arts || [];
+  doneLoading();
+  goTo('s-e-article', true);
+  loadEArticle();
+}
+function loadEArticle() {
+  if (!S.currentEmp) return;
+  document.getElementById('ea-emp-name').textContent = S.currentEmp.NOMBRE;
+  const evaluadosIds = new Set(S.evaluaciones.map(e=>e.ART_ID));
+  const sinEvaluar = (S.articulosEmp||[]).filter(a=>!evaluadosIds.has(a.ART_ID));
+  document.getElementById('ea-sugeridos').innerHTML = sinEvaluar.length
+    ? `<div class="stitle" style="margin-top:0">⚡ Sugeridos — sin evaluar</div>`
+      + sinEvaluar.slice(0,4).map(a=>`<div class="li" style="border-color:#d4b6e8" onclick="selectArtEvaluar('${a.ART_ID}')">
+        <div class="li-left"><div class="li-name">${a.NOMBRE}</div><div class="li-sub">${a.CATEGORIA||'—'}</div></div>
+        <span class="bdg bdg-pur">Sin evaluar</span>
+      </div>`).join('') : '';
+  filterEArticulos();
+}
+function filterEArticulos() {
+  const q = (document.getElementById('ea-search')?.value||'').toLowerCase();
+  const list = (S.articulosEmp||[]).filter(a=>a.NOMBRE.toLowerCase().includes(q));
+  document.getElementById('ea-items').innerHTML = list.map(a=>{
+    const evs = S.evaluaciones.filter(e=>e.ART_ID===a.ART_ID);
+    const last = evs[evs.length-1];
+    return `<div class="li" onclick="selectArtEvaluar('${a.ART_ID}')">
+      <div class="li-left"><div class="li-name">${a.NOMBRE}</div><div class="li-sub">${last?`Última eval: ${last.FECHA} · ${last.SCORE}/4`:'Sin evaluaciones'}</div></div>
+      <span style="color:var(--gris)">›</span>
+    </div>`;
+  }).join('');
+}
+function selectArtEvaluar(id) {
+  S.currentArt = (S.articulosEmp||S.articulos).find(a=>a.ART_ID===id);
+  S.evalState = {ing:null,pro:null,est:null,tie:null};
+  goTo('s-e-eval', true);
+  document.getElementById('ee-art-name').textContent = S.currentArt.NOMBRE;
+  document.getElementById('ee-emp-name').textContent = S.currentEmp.NOMBRE;
+  ['ing','pro','est','tie'].forEach(k=>{
+    document.getElementById('ev-'+k+'-y').className='tg';
+    document.getElementById('ev-'+k+'-n').className='tg';
+  });
+  document.getElementById('ev-notas').value='';
+}
+function setEval(key, val) {
+  S.evalState[key] = val;
+  document.getElementById('ev-'+key+'-y').className = 'tg' + (val?'  yes':'');
+  document.getElementById('ev-'+key+'-n').className = 'tg' + (!val?' no':'');
+}
+async function saveEvaluacion() {
+  const any = Object.values(S.evalState).some(v=>v!==null);
+  if (!any) { toast('Evalúa al menos un criterio'); return; }
+  loading('Guardando...');
+  await apiPost({ action:'saveEvaluacion', empId: S.currentEmp.EMP_ID, artId: S.currentArt.ART_ID, ...S.evalState, notas: document.getElementById('ev-notas').value, supervisor: S.supervisor?.nombre });
+  doneLoading();
+  toast('Evaluación guardada ✓');
+  goBack();
+}
+async function loadEHistory() {
+  document.getElementById('eh-name').textContent = S.currentEmp?.NOMBRE || 'Historial';
+  document.getElementById('eh-items').innerHTML = (S.evaluaciones||[]).reverse().map(e=>{
+    const art = (S.articulosEmp||S.articulos).find(a=>a.ART_ID===e.ART_ID);
+    return `<div class="card">
+      <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+        <span style="font-size:14px;font-weight:700">${art?.NOMBRE||e.ART_ID}</span>
+        <span class="bdg ${e.SCORE>=4?'bdg-ok':e.SCORE>=3?'bdg-warn':'bdg-err'}">${e.SCORE}/4</span>
+      </div>
+      <div style="font-size:12px;color:var(--gris)">${e.FECHA||'—'}</div>
+      ${e.NOTAS?`<div style="font-size:13px;margin-top:5px">${e.NOTAS}</div>`:''}
+    </div>`;
+  }).join('') || '<div class="empty"><p>Sin evaluaciones registradas.</p></div>';
+}
+
+// ════════════════════════════════════════════
+// MEJORA CONTINUA
+// ════════════════════════════════════════════
+async function loadDudas() {
+  const r = await apiGet({action:'getDudas'});
+  S.dudas = r || [];
+  renderDudas(S.dudas);
+}
+function renderDudas(list) {
+  document.getElementById('mc-results').innerHTML = list.map(d=>
+    `<div class="li" onclick="showDuda('${d.ID}')">
+      <div class="li-left"><div class="li-name" style="white-space:normal;line-height:1.3">${d.PREGUNTA}</div></div>
+      <span style="color:var(--gris)">›</span>
+    </div>`
+  ).join('') || '<div class="empty" style="padding:20px"><p>Aún no hay preguntas respondidas.</p></div>';
+}
+async function searchDudas() {
+  const q = document.getElementById('mc-search').value;
+  if (!q.trim()) { renderDudas(S.dudas||[]); return; }
+  const r = await apiGet({action:'searchDudas', q});
+  renderDudas(r||[]);
+}
+function showDuda(id) {
+  const d = (S.dudas||[]).find(x=>x.ID===id);
+  if (!d) return;
+  document.getElementById('mca-question').textContent = d.PREGUNTA;
+  document.getElementById('mca-answer').innerHTML = (d.RESPUESTA||'').replace(/\n/g,'<br>');
+  goTo('s-mc-answer', true);
+}
+async function saveDuda() {
+  const q = document.getElementById('mc-new-q').value.trim();
+  if (!q) { toast('Escribe tu pregunta primero'); return; }
+  loading('Enviando...');
+  await apiPost({action:'saveDuda', pregunta: q, supervisor: S.supervisor?.nombre});
+  doneLoading();
+  toast('Pregunta enviada ✓ Ari la responderá pronto');
+  document.getElementById('mc-new-q').value='';
+  goBack();
+}
+
+// ════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  // Restaurar sesión si existe
+  const saved = sessionStorage.getItem('chatello_sup');
+  if (saved) {
+    try {
+      S.supervisor = JSON.parse(saved);
+      document.getElementById('menu-name').textContent = S.supervisor.nombre;
+    } catch(e) {}
+  }
+});
+</script>
+</body>
+</html>
