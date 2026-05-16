@@ -180,6 +180,9 @@ textarea.inp{min-height:80px;resize:none}
   </div>
   <div class="content">
     <div class="ig"><label class="lbl">Nombre completo</label><input id="pn-nombre" class="inp" type="text" placeholder="Nombre completo del candidato"></div>
+    <div class="ig"><label class="lbl">Fecha de nacimiento</label><input id="pn-nacimiento" class="inp" type="date"></div>
+    <div class="ig"><label class="lbl">Teléfono personal</label><input id="pn-telefono" class="inp" type="tel" placeholder="10 dígitos"></div>
+    <div class="ig"><label class="lbl">Correo electrónico</label><input id="pn-correo" class="inp" type="email" placeholder="correo@ejemplo.com"></div>
     <div class="ig"><label class="lbl">Puesto al que aplica</label>
       <select id="pn-puesto" class="inp sel"><option value="">Seleccionar...</option><option>Ayudante Matutino</option><option>Ayudante Vespertino</option><option>Ayudante Mixto</option><option>Barista</option><option>Cocinero</option><option>Cocinero en Producción</option><option>Mesero</option><option>Encargado</option></select></div>
     <div class="ig"><label class="lbl">Turno</label>
@@ -187,7 +190,7 @@ textarea.inp{min-height:80px;resize:none}
     <div class="ig"><label class="lbl">Fecha de entrevista</label><input id="pn-fecha" class="inp" type="date"></div>
     <div class="ig"><label class="lbl">Tipo de entrevista</label>
       <select id="pn-tipo" class="inp sel"><option value="">Seleccionar...</option><option>Empleado general</option><option>Encargado</option><option>Cocinero en producción</option><option>Cocinero</option></select></div>
-    <button class="btn btn-primary btn-center" onclick="saveCandidato()">Guardar candidato</button>
+    <button class="btn btn-primary btn-center" onclick="saveCandidato()">Guardar candidato →</button>
   </div>
 </div>
 
@@ -195,11 +198,30 @@ textarea.inp{min-height:80px;resize:none}
   <div class="topbar mod-p"><div class="tb-back" onclick="goBack()">‹</div><div><div class="tb-title" id="pi-name">Entrevista</div><div class="tb-sub" id="pi-tipo">—</div></div></div>
   <div class="content">
     <div class="card" style="background:#fff8e1;border-color:#ffca28">
-      <div style="font-size:12px;font-weight:700;color:#795548;margin-bottom:4px">GUÍA DE ENTREVISTA</div>
-      <div style="font-size:13px;color:#555;line-height:1.5">Estas son las preguntas sugeridas según el tipo de puesto. Anota las respuestas.</div>
+      <div style="font-size:12px;font-weight:700;color:#795548;margin-bottom:4px">ENTREVISTA DE INGRESO</div>
+      <div style="font-size:13px;color:#555;line-height:1.5">Anota las respuestas del candidato a cada pregunta.</div>
     </div>
-    <div id="pi-questions"></div>
-    <div class="ig" style="margin-top:16px"><label class="lbl">Notas generales de la entrevista</label><textarea id="pi-notas" class="inp" placeholder="Observaciones, actitud, puntualidad..."></textarea></div>
+    <div class="ig"><label class="lbl">1. ¿Por cuánto tiempo planeas tener este trabajo?</label><textarea id="piq-0" class="inp" placeholder="Respuesta del candidato..."></textarea></div>
+    <div class="ig"><label class="lbl">2. ¿Cuáles son tus expectativas de trabajar con nosotros?</label><textarea id="piq-1" class="inp" placeholder="Respuesta del candidato..."></textarea></div>
+    <div class="ig"><label class="lbl">3. ¿Cuál es tu meta y compromiso personal en este trabajo?</label><textarea id="piq-2" class="inp" placeholder="Respuesta del candidato..."></textarea></div>
+    <div class="ig"><label class="lbl">4. ¿Cuál es tu experiencia en relación a los valores de la empresa?</label><textarea id="piq-3" class="inp" placeholder="Respuesta del candidato..."></textarea></div>
+    <div class="ig"><label class="lbl">5. ¿Cuál es tu experiencia con compañeros y superiores?</label><textarea id="piq-4" class="inp" placeholder="Respuesta del candidato..."></textarea></div>
+    <div class="ig" style="margin-top:4px"><label class="lbl">Notas generales (actitud, puntualidad, observaciones)</label><textarea id="pi-notas" class="inp" placeholder="Observaciones generales..."></textarea></div>
+    <div class="stitle" style="margin-top:18px">Evaluación por criterios — Anexo</div>
+    <div style="font-size:12px;color:var(--gris);margin-bottom:10px;line-height:1.4">Escucha la respuesta del candidato y selecciona la puntuación de cada criterio.</div>
+    <div id="pi-criterios"></div>
+    <div class="stitle">Personalidad y estilo de trabajo</div>
+    <div id="pi-mc"></div>
+    <div id="pi-score-card" class="card" style="margin-bottom:16px;display:none">
+      <div style="font-size:11px;font-weight:700;color:var(--gris);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px">Puntuación total</div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <div id="pi-score-num" style="font-size:42px;font-weight:700;color:var(--cafe)">0</div>
+        <div>
+          <div id="pi-score-label" style="font-size:15px;font-weight:700">—</div>
+          <div id="pi-score-max" style="font-size:12px;color:var(--gris)">pts</div>
+        </div>
+      </div>
+    </div>
     <button class="btn btn-primary btn-center" onclick="goTo('s-p-reference')">Continuar → Referencia laboral</button>
   </div>
 </div>
@@ -207,13 +229,29 @@ textarea.inp{min-height:80px;resize:none}
 <div id="s-p-reference" class="screen">
   <div class="topbar mod-p"><div class="tb-back" onclick="goBack()">‹</div><div class="tb-title">Referencia laboral</div></div>
   <div class="content">
-    <div class="ig"><label class="lbl">Empresa anterior</label><input id="pr-empresa" class="inp" type="text" placeholder="Nombre de la empresa"></div>
+    <p class="stitle" style="margin-top:0">Referencia laboral</p>
+    <div class="ig"><label class="lbl">Nombre y dirección de referencia laboral</label><input id="pr-empresa" class="inp" type="text" placeholder="Nombre de la empresa y dirección"></div>
     <div class="ig"><label class="lbl">Nombre del contacto</label><input id="pr-contacto" class="inp" type="text" placeholder="Nombre del jefe / RRHH"></div>
-    <div class="ig"><label class="lbl">Teléfono</label><input id="pr-tel" class="inp" type="tel" placeholder="Número de contacto"></div>
+    <div class="ig"><label class="lbl">Teléfono del contacto</label><input id="pr-tel" class="inp" type="tel" placeholder="Número de contacto"></div>
     <div class="ig"><label class="lbl">Motivo de baja</label><textarea id="pr-motivo" class="inp" placeholder="¿Por qué dejó de trabajar ahí?"></textarea></div>
     <div class="ig"><label class="lbl">Calificación de desempeño (1–10)</label><input id="pr-score" class="inp" type="number" min="1" max="10" placeholder="1 – 10"></div>
     <div class="ig"><label class="lbl">¿Lo recontratarían?</label>
       <select id="pr-recontrata" class="inp sel"><option value="">Seleccionar...</option><option>Sí</option><option>No</option><option>Con reservas</option><option>No se pudo contactar</option></select></div>
+    <p class="stitle">Contacto de emergencia</p>
+    <div class="ig"><label class="lbl">Nombre completo del contacto</label><input id="pr-emerg-nombre" class="inp" type="text" placeholder="Nombre del familiar / contacto"></div>
+    <div class="ig"><label class="lbl">Teléfono de emergencia</label><input id="pr-emerg-tel" class="inp" type="tel" placeholder="Número de contacto de emergencia"></div>
+    <p class="stitle">Documentos entregados</p>
+    <div class="card" style="padding:14px 16px">
+      <label style="display:flex;align-items:center;gap:12px;font-size:14px;margin-bottom:12px;cursor:pointer">
+        <input type="checkbox" id="doc-domicilio" style="width:18px;height:18px;accent-color:var(--cafe);flex-shrink:0"> Comprobante de domicilio
+      </label>
+      <label style="display:flex;align-items:center;gap:12px;font-size:14px;margin-bottom:12px;cursor:pointer">
+        <input type="checkbox" id="doc-recomendacion" style="width:18px;height:18px;accent-color:var(--cafe);flex-shrink:0"> Carta de recomendación laboral
+      </label>
+      <label style="display:flex;align-items:center;gap:12px;font-size:14px;cursor:pointer">
+        <input type="checkbox" id="doc-permiso" style="width:18px;height:18px;accent-color:var(--cafe);flex-shrink:0"> Carta de permiso laboral <span style="color:var(--gris);font-size:12px">(solo si es menor de edad)</span>
+      </label>
+    </div>
     <button class="btn btn-primary btn-center" onclick="goTo('s-p-decision')">Continuar → Decisión</button>
   </div>
 </div>
@@ -345,6 +383,15 @@ textarea.inp{min-height:80px;resize:none}
 <div id="s-c-register" class="screen">
   <div class="topbar mod-c"><div class="tb-back" onclick="goBack()">‹</div><div><div class="tb-title" id="cr-art-name">Registrar avance</div><div class="tb-sub" id="cr-emp-name">—</div></div></div>
   <div class="content">
+    <div class="stitle">Cronómetro de preparación</div>
+    <div class="card" style="padding:14px 16px;margin-bottom:14px">
+      <div style="text-align:center;font-size:38px;font-weight:700;color:var(--cafe);font-variant-numeric:tabular-nums;letter-spacing:2px;margin-bottom:10px" id="cr-timer-display">0:00</div>
+      <div style="display:flex;gap:8px">
+        <button id="cr-timer-start" onclick="timerToggle()" style="flex:1;padding:10px;border-radius:10px;border:none;background:var(--verde);color:#fff;font-size:13px;font-weight:700;cursor:pointer">▶ Iniciar</button>
+        <button onclick="timerReset()" style="flex:1;padding:10px;border-radius:10px;border:1.5px solid var(--crema-dark);background:#fff;font-size:13px;font-weight:700;cursor:pointer;color:var(--gris)">↺ Reiniciar</button>
+      </div>
+    </div>
+    <div class="ig"><label class="lbl">Tiempo registrado (mm:ss) — editable</label><input id="cr-tiempo" class="inp" type="text" placeholder="ej: 3:45" style="font-size:18px;font-weight:700;text-align:center"></div>
     <div class="stitle">Estado actual</div>
     <button id="cr-vista" class="btn btn-light" onclick="selectAvance('Vista')">👁️ Vista por primera vez</button>
     <button id="cr-practicado" class="btn btn-light" onclick="selectAvance('Practicado')">🔄 Practicado (con ayuda)</button>
@@ -464,6 +511,7 @@ const S = {
   currentEmp: null,
   currentCand: null,
   currentArt: null,
+  interviewScores: {},
   progresoEmp: [],
   evalState: { ing: null, pro: null, est: null, tie: null },
   avanceSelected: null,
@@ -484,12 +532,42 @@ const CHECKLIST_ITEMS = [
   { id: 'CI-10', label: 'Explicación de tabla de cambios de turno y acciones diarias' },
 ];
 
-// Preguntas por tipo de entrevista
-const INTERVIEW_Q = {
-  'Empleado general': ['¿Por qué te interesa trabajar en Chatello?','¿Tienes experiencia en servicio al cliente?','¿Cómo manejas situaciones de estrés?','¿Cuál es tu disponibilidad de horario?','¿Tienes alguna limitación física que debamos considerar?'],
-  'Encargado': ['¿Tienes experiencia manejando equipos de trabajo?','¿Cómo resuelves conflictos entre compañeros?','¿Cómo priorizas tareas en momento de alto tráfico?','¿Qué harías si un empleado no sigue el reglamento?','¿Tienes experiencia en manejo de caja y cierres?'],
-  'Cocinero en producción': ['¿Qué experiencia tienes en producción de alimentos?','¿Conoces normas básicas de higiene en cocina?','¿Puedes trabajar bajo presión de tiempo?','¿Tienes experiencia con equipos industriales?','¿Cuál es tu fortaleza en cocina?'],
-  'Cocinero': ['¿Cuál es tu experiencia en cocina profesional?','¿Conoces los estándares de higiene y manejo de alimentos?','¿Has trabajado con recetas estandarizadas?','¿Cómo garantizas consistencia en la presentación?','¿Qué haces si se acaba un ingrediente durante el servicio?'],
+// ─── Criterios de evaluación por anexo (2=buena, 1=regular, -1=sin) ───
+const CRITERIOS = [
+  { id:'edad',       label:'Edad y madurez',              pregunta:'Observar edad del candidato (sin preguntar directamente)' },
+  { id:'vivienda',   label:'Vivienda y transporte',        pregunta:'¿Tu vivienda y transporte podrían afectar tu horario?',      skipFor:['Cocinero en producción','Cocinero'] },
+  { id:'salud',      label:'Salud',                        pregunta:'¿Tienes alguna enfermedad crónica? ¿Tomas algún medicamento?' },
+  { id:'habilidades',label:'Habilidades e intereses',      pregunta:'¿Practicas algún deporte? ¿Cuál es tu pasatiempo favorito?' },
+  { id:'meta',       label:'Competitividad y retención',   pregunta:'¿Cuál es tu meta en la vida? / ¿Cómo te ves en 5 años?' },
+  { id:'escolar',    label:'Nivel escolar',                pregunta:'¿Estás estudiando o qué fue lo último que estudiaste?' },
+  { id:'duracion',   label:'Duración en empleos anteriores', pregunta:'¿Cuánto tiempo duró en sus trabajos anteriores?' },
+  { id:'actividades',label:'Actividades y puesto previo',  pregunta:'¿Qué actividades realizabas? ¿Cuál era tu puesto?' },
+  { id:'fortalezas', label:'Fortalezas',                   pregunta:'¿Cuáles son 3 cosas que te gustaría mucho hacer o que se te hagan muy fáciles?' },
+  { id:'debilidades',label:'Debilidades',                  pregunta:'¿Cuáles son 3 cosas que NO te gustaría hacer o que se te hicieran difíciles?' },
+];
+
+// ─── Opciones de personalidad por tipo (índice 0=2pts, 1=1pt, 2=-1pt) ───
+const MC_ESTRES = {
+  'default':                ['Me gusta ser abierto con la gente; me gustan los retos. Cuando hay mucho trabajo, me motiva organizarme para realizarlo a tiempo.', 'Me gusta este trabajo, atiendo lo que sea necesario, aunque prefiero trabajar sin presión.', 'Soy muy dedicado; cuando hay muchos pedidos podría generarme molestia o estrés.'],
+  'Encargado':              ['Me gusta ser abierto con la gente; me gustan los retos. Cuando hay mucho trabajo, me motiva organizarme para realizarlo a tiempo.', 'Me gusta este trabajo, atiendo lo que sea necesario, aunque prefiero trabajar sin presión.', 'Soy muy dedicado; cuando hay muchos pedidos podría generarme molestia o estrés.'],
+  'Cocinero en producción': ['Me gusta este trabajo, soy organizado y me es más cómodo trabajar sin presión.', 'Me gustan los retos; cuando hay muchas preparaciones, me motiva sacarlas a tiempo.', 'Soy muy dedicado; cuando hay muchos pedidos podría generarme estrés.'],
+  'Cocinero':               ['Me gustan los retos; cuando hay muchas preparaciones, me motiva sacarlas a tiempo.', 'Me gusta este trabajo, aunque prefiero trabajar sin presión.', 'Soy muy dedicado; cuando hay muchos pedidos podría generarme estrés.'],
+};
+const MC_EQUIPO = {
+  'default':                ['Me gusta que un líder me guíe y trabajar equitativamente en equipo.', 'Me considero autónomo; todos somos responsables sin que alguien lidere.', 'Me gusta liderar un equipo y crear un ambiente de trabajo.'],
+  'Encargado':              ['Me gusta liderar un equipo y crear un ambiente de trabajo en equipo.', 'Me considero autónomo; todos somos responsables sin que alguien lidere.', 'Me gusta que un líder me guíe y trabajar equitativamente en equipo.'],
+  'Cocinero en producción': ['Me considero autónomo, soy responsable de mis actividades sin que alguien me lidere.', 'Me gusta que un líder me guíe y trabajar equitativamente en equipo.', 'Me gusta liderar un equipo.'],
+  'Cocinero':               ['Me considero autónomo, soy responsable de mis actividades sin que alguien me lidere.', 'Me gusta que un líder me guíe y trabajar equitativamente.', 'Me gusta liderar un equipo.'],
+};
+const MC_CLIENTE = {
+  'default':   ['Me gusta mucho hablar con las personas y brindar el mejor servicio; se me facilita expresarme y hacer amistad.', 'Doy un servicio atento y amable; no soy extrovertido pero me agrada la atención al cliente.', 'Me considero introvertido; prefiero actividades sin contacto con clientes.'],
+  'Encargado': ['Me gusta mucho hablar con las personas y brindar el mejor servicio.', 'Doy un servicio atento y amable aunque no soy extrovertido.', 'Me considero introvertido; prefiero actividades sin contacto con clientes.'],
+};
+const MC_INTELIGENCIA = {
+  'default':                ['Corporal-kinestésica: habilidad para controlar y coordinar movimientos; destreza física.', 'Interpersonal: habilidad para comprender e interactuar con otros; empatía y comunicación.', 'Lógico-matemática: habilidad para razonar abstractamente y resolver problemas.'],
+  'Encargado':              ['Interpersonal: habilidad para comprender e interactuar con otros; empatía y comunicación.', 'Corporal-kinestésica: habilidad para controlar y coordinar movimientos; destreza física.', 'Lógico-matemática: habilidad para razonar abstractamente y resolver problemas.'],
+  'Cocinero en producción': ['Corporal-kinestésica: habilidad para controlar y coordinar movimientos; destreza física.', 'Espacial: habilidad para percibir, comprender y manipular objetos en el espacio.', 'Interpersonal: habilidad para comprender e interactuar con otros.'],
+  'Cocinero':               ['Corporal-kinestésica: habilidad para controlar y coordinar movimientos; destreza física.', 'Espacial: habilidad para percibir y manipular objetos en el espacio.', 'Lingüística: habilidad para usar el lenguaje de manera efectiva.'],
 };
 
 // ════════════════════════════════════════════
@@ -520,11 +598,10 @@ function goToMenu() {
 }
 
 function clearPNew() {
-  document.getElementById('pn-nombre').value = '';
-  document.getElementById('pn-puesto').value = '';
-  document.getElementById('pn-turno').value = '';
-  document.getElementById('pn-fecha').value = '';
-  document.getElementById('pn-tipo').value = '';
+  ['pn-nombre','pn-nacimiento','pn-telefono','pn-correo','pn-puesto','pn-turno','pn-fecha','pn-tipo'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
   S.currentCand = null;
 }
 
@@ -643,16 +720,88 @@ function selectCandidato(id) {
 function loadPInterview() {
   if (!S.currentCand) return;
   document.getElementById('pi-name').textContent = S.currentCand.NOMBRE;
-  document.getElementById('pi-tipo').textContent = S.currentCand.TIPO_ENTREVISTA || 'Entrevista general';
-  const qs = INTERVIEW_Q[S.currentCand.TIPO_ENTREVISTA] || INTERVIEW_Q['Empleado general'];
-  document.getElementById('pi-questions').innerHTML = qs.map((q,i) =>
-    `<div class="ig"><label class="lbl">Pregunta ${i+1}</label>
-     <div style="font-size:14px;font-weight:600;color:var(--texto);margin-bottom:6px;line-height:1.4">${q}</div>
-     <textarea class="inp" id="piq-${i}" placeholder="Respuesta del candidato..."></textarea></div>`
-  ).join('');
+  const tipo = S.currentCand.TIPO_ENTREVISTA || 'Empleado general';
+  document.getElementById('pi-tipo').textContent = tipo;
+  // Limpiar respuestas previas
+  for (let i = 0; i < 5; i++) { const el = document.getElementById('piq-'+i); if (el) el.value = ''; }
+  const notas = document.getElementById('pi-notas'); if (notas) notas.value = '';
+  S.interviewScores = {};
+
+  // ── Renderizar criterios de evaluación ──
+  const criteriosEl = document.getElementById('pi-criterios');
+  const filtrados = CRITERIOS.filter(c => !c.skipFor || !c.skipFor.includes(tipo));
+  criteriosEl.innerHTML = filtrados.map(c => `
+    <div class="card" style="padding:12px 14px;margin-bottom:10px">
+      <div style="font-size:11px;font-weight:700;color:var(--gris);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px">${c.label}</div>
+      <div style="font-size:13px;color:var(--texto);margin-bottom:10px;line-height:1.4">${c.pregunta}</div>
+      <div style="display:flex;gap:7px">
+        <button onclick="setPScore('${c.id}',2)"  id="sc-${c.id}-2"  style="flex:1;padding:7px 2px;border-radius:9px;border:1.5px solid #a5d6a7;background:#fff;font-size:11px;font-weight:700;cursor:pointer;color:#2e7d32;line-height:1.3">⭐ Buena<br><span style="font-weight:400;font-size:10px">2 pts</span></button>
+        <button onclick="setPScore('${c.id}',1)"  id="sc-${c.id}-1"  style="flex:1;padding:7px 2px;border-radius:9px;border:1.5px solid #ffca28;background:#fff;font-size:11px;font-weight:700;cursor:pointer;color:#795548;line-height:1.3">〜 Regular<br><span style="font-weight:400;font-size:10px">1 pt</span></button>
+        <button onclick="setPScore('${c.id}',-1)" id="sc-${c.id}--1" style="flex:1;padding:7px 2px;border-radius:9px;border:1.5px solid #ef9a9a;background:#fff;font-size:11px;font-weight:700;cursor:pointer;color:#c62828;line-height:1.3">✗ Sin<br><span style="font-weight:400;font-size:10px">-1 pt</span></button>
+      </div>
+    </div>`).join('');
+
+  // ── Renderizar preguntas de personalidad (MC) ──
+  const isCook = tipo.includes('Cocinero');
+  const mcQuestions = [
+    { id:'estres',       label:'Manejo de estrés',          opts: MC_ESTRES[tipo]||MC_ESTRES['default'] },
+    { id:'equipo',       label:'Trabajo en equipo',         opts: MC_EQUIPO[tipo]||MC_EQUIPO['default'] },
+    ...(!isCook ? [{ id:'cliente', label:'Atención al cliente', opts: MC_CLIENTE[tipo]||MC_CLIENTE['default'] }] : []),
+    { id:'inteligencia', label:'Tipo de inteligencia',      opts: MC_INTELIGENCIA[tipo]||MC_INTELIGENCIA['default'] },
+  ];
+  document.getElementById('pi-mc').innerHTML = mcQuestions.map(function(q) {
+    const ptsList = [2,1,-1];
+    const opts = q.opts.map(function(op, i) {
+      const pts = ptsList[i];
+      const ptsLabel = (pts > 0 ? '+' : '') + pts + 'pt';
+      return '<label style="display:flex;align-items:flex-start;gap:10px;padding:8px 10px;border-radius:9px;border:1.5px solid var(--crema-dark);margin-bottom:6px;cursor:pointer;background:#fff">'
+        + '<input type="radio" name="mc-' + q.id + '" value="' + i + '" onchange="setMC(\'' + q.id + '\',' + pts + ')" style="margin-top:3px;accent-color:var(--cafe);flex-shrink:0">'
+        + '<span style="font-size:12px;line-height:1.5">' + op + ' <span style="color:var(--gris);font-size:11px">(' + ptsLabel + ')</span></span>'
+        + '</label>';
+    }).join('');
+    return '<div class="card" style="padding:12px 14px;margin-bottom:10px">'
+      + '<div style="font-size:11px;font-weight:700;color:var(--gris);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px">' + q.label + '</div>'
+      + '<div style="font-size:12px;color:var(--gris);margin-bottom:8px">El candidato elige una opción:</div>'
+      + opts + '</div>';
+  }).join('');
+
+  updatePScore();
+}
+function setPScore(id, pts) {
+  S.interviewScores[id] = pts;
+  [-1,1,2].forEach(p => {
+    const btn = document.getElementById(`sc-${id}-${p}`);
+    if (!btn) return;
+    const sel = p===pts;
+    btn.style.background = sel ? (p===2?'#e6f4ea':p===1?'#fff8e1':'#fce4ec') : '#fff';
+    btn.style.borderColor = sel ? (p===2?'#4caf50':p===1?'#ffb300':'#e53935') : (p===2?'#a5d6a7':p===1?'#ffca28':'#ef9a9a');
+  });
+  updatePScore();
+}
+function setMC(qid, pts) { S.interviewScores['mc_'+qid]=pts; updatePScore(); }
+function updatePScore() {
+  const vals = Object.values(S.interviewScores);
+  if (!vals.length) return;
+  const total = vals.reduce((a,b)=>a+b,0);
+  const tipo = S.currentCand?.TIPO_ENTREVISTA||'Empleado general';
+  const isCook = tipo.includes('Cocinero');
+  const maxPts = isCook ? 30 : 34;
+  const aprobado = total >= (isCook?21:24);
+  const consideracion = !aprobado && total >= (isCook?11:12);
+  const card = document.getElementById('pi-score-card');
+  card.style.display='block';
+  document.getElementById('pi-score-num').textContent = total;
+  document.getElementById('pi-score-max').textContent = `pts · máximo ${maxPts}`;
+  const lbl = document.getElementById('pi-score-label');
+  if (aprobado)      { lbl.textContent='✅ Aprobado';           lbl.style.color='#2e7d32'; card.style.background='#e6f4ea'; card.style.borderColor='#a5d6a7'; }
+  else if (consideracion){ lbl.textContent='🕐 En consideración'; lbl.style.color='#795548'; card.style.background='#fff8e1'; card.style.borderColor='#ffca28'; }
+  else               { lbl.textContent='❌ No aprobado';        lbl.style.color='#c62828'; card.style.background='#fce4ec'; card.style.borderColor='#ef9a9a'; }
 }
 async function saveCandidato() {
   const nombre = document.getElementById('pn-nombre').value.trim();
+  const nacimiento = document.getElementById('pn-nacimiento').value;
+  const telefono = document.getElementById('pn-telefono').value.trim();
+  const correo = document.getElementById('pn-correo').value.trim();
   const puesto = document.getElementById('pn-puesto').value;
   const turno = document.getElementById('pn-turno').value;
   const fecha = document.getElementById('pn-fecha').value;
@@ -661,20 +810,58 @@ async function saveCandidato() {
   loading('Guardando...');
   const r = await apiPost({ action:'saveCandidato', nombre, puesto, turno, fechaEntrevista: fecha, tipoEntrevista: tipo, supervisor: S.supervisor?.nombre });
   doneLoading();
-  if (r.ok) { S.currentCand = { CAND_ID: r.candId, NOMBRE: nombre, PUESTO: puesto, TURNO: turno, TIPO_ENTREVISTA: tipo }; toast('Candidato guardado ✓'); goTo('s-p-interview'); }
-  else toast('Error al guardar');
+  if (r.ok) {
+    S.currentCand = { CAND_ID: r.candId, NOMBRE: nombre, PUESTO: puesto, TURNO: turno, TIPO_ENTREVISTA: tipo, FECHA_ENTREVISTA: fecha, NACIMIENTO: nacimiento, TELEFONO: telefono, CORREO: correo };
+    toast('Candidato guardado ✓');
+    goTo('s-p-interview');
+  } else toast('Error al guardar');
 }
 function loadPDecision() {
   if (!S.currentCand) return;
+  const ref = document.getElementById('pr-recontrata')?.value || '—';
+  const docDom = document.getElementById('doc-domicilio')?.checked;
+  const docRec = document.getElementById('doc-recomendacion')?.checked;
+  const docPer = document.getElementById('doc-permiso')?.checked;
+  const docs = [docDom?'✅ Comprobante domicilio':'❌ Comprobante domicilio', docRec?'✅ Carta recomendación':'❌ Carta recomendación', docPer?'✅ Carta permiso':'—'].join(' · ');
   document.getElementById('pd-summary').innerHTML = `
     <div>👤 <strong>${S.currentCand.NOMBRE}</strong></div>
+    <div>📱 ${S.currentCand.TELEFONO||'—'} · ${S.currentCand.CORREO||'—'}</div>
     <div>💼 ${S.currentCand.PUESTO||'—'} · ${S.currentCand.TURNO||'—'}</div>
     <div>📅 Entrevista: ${S.currentCand.FECHA_ENTREVISTA||'—'}</div>
-    <div>📋 Tipo: ${S.currentCand.TIPO_ENTREVISTA||'—'}</div>`;
+    <div style="margin-top:8px;font-size:12px;color:var(--gris)">¿Recontratarían? ${ref}</div>
+    <div style="font-size:12px;color:var(--gris);margin-top:4px">${docs}</div>`;
 }
 async function decideCandidato(decision) {
   loading('Guardando decisión...');
-  const r = await apiPost({ action:'saveEntrevista', candId: S.currentCand.CAND_ID, nombre: S.currentCand.NOMBRE, puesto: S.currentCand.PUESTO, turno: S.currentCand.TURNO, decision, supervisor: S.supervisor?.nombre });
+  // Recopilar respuestas de entrevista
+  const datosEntrevista = {
+    q1_tiempo: document.getElementById('piq-0')?.value || '',
+    q2_expectativas: document.getElementById('piq-1')?.value || '',
+    q3_meta: document.getElementById('piq-2')?.value || '',
+    q4_valores: document.getElementById('piq-3')?.value || '',
+    q5_companeros: document.getElementById('piq-4')?.value || '',
+    notas: document.getElementById('pi-notas')?.value || '',
+    nacimiento: S.currentCand.NACIMIENTO || '',
+    telefono: S.currentCand.TELEFONO || '',
+    correo: S.currentCand.CORREO || '',
+    criterios: S.interviewScores,
+    scoreTotal: Object.values(S.interviewScores).reduce(function(a,b){return a+b;}, 0)
+  };
+  // Recopilar referencia + contacto de emergencia + documentos
+  const referencia = {
+    empresa: document.getElementById('pr-empresa')?.value || '',
+    contacto: document.getElementById('pr-contacto')?.value || '',
+    telefono: document.getElementById('pr-tel')?.value || '',
+    motivo: document.getElementById('pr-motivo')?.value || '',
+    score: document.getElementById('pr-score')?.value || '',
+    recontrata: document.getElementById('pr-recontrata')?.value || '',
+    emergenciaNombre: document.getElementById('pr-emerg-nombre')?.value || '',
+    emergenciaTel: document.getElementById('pr-emerg-tel')?.value || '',
+    docDomicilio: document.getElementById('doc-domicilio')?.checked || false,
+    docRecomendacion: document.getElementById('doc-recomendacion')?.checked || false,
+    docPermiso: document.getElementById('doc-permiso')?.checked || false
+  };
+  const r = await apiPost({ action:'saveEntrevista', candId: S.currentCand.CAND_ID, nombre: S.currentCand.NOMBRE, puesto: S.currentCand.PUESTO, turno: S.currentCand.TURNO, decision, datosEntrevista, referencia, supervisor: S.supervisor?.nombre });
   doneLoading();
   if (r.ok) {
     toast(decision === 'Aceptado' ? '✅ Aceptado — empleado creado' : 'Decisión guardada');
@@ -901,17 +1088,46 @@ function selectAvance(estado) {
     if (k === estado.toLowerCase()) btn.className = 'btn btn-primary';
   });
 }
+// ── Cronómetro ──
+let _timerInterval = null, _timerSecs = 0, _timerRunning = false;
+function timerToggle() {
+  const btn = document.getElementById('cr-timer-start');
+  if (_timerRunning) {
+    clearInterval(_timerInterval); _timerRunning = false;
+    btn.textContent = '▶ Continuar'; btn.style.background = 'var(--naranja)';
+    // Volcar tiempo al input editable
+    document.getElementById('cr-tiempo').value = timerFmt(_timerSecs);
+  } else {
+    _timerRunning = true;
+    btn.textContent = '⏸ Pausar'; btn.style.background = '#c62828';
+    _timerInterval = setInterval(function() {
+      _timerSecs++;
+      document.getElementById('cr-timer-display').textContent = timerFmt(_timerSecs);
+      document.getElementById('cr-tiempo').value = timerFmt(_timerSecs);
+    }, 1000);
+  }
+}
+function timerReset() {
+  clearInterval(_timerInterval); _timerRunning = false; _timerSecs = 0;
+  document.getElementById('cr-timer-display').textContent = '0:00';
+  document.getElementById('cr-tiempo').value = '';
+  const btn = document.getElementById('cr-timer-start');
+  btn.textContent = '▶ Iniciar'; btn.style.background = 'var(--verde)';
+}
+function timerFmt(s) { return Math.floor(s/60) + ':' + String(s%60).padStart(2,'0'); }
+
 async function saveAvance() {
   if (!S.avanceSelected) { toast('Selecciona el estado primero'); return; }
+  const tiempo = document.getElementById('cr-tiempo').value.trim();
   loading('Guardando...');
-  await apiPost({ action:'saveAvance', empId: S.currentEmp.EMP_ID, artId: S.currentArt.ART_ID, estado: S.avanceSelected, notas: document.getElementById('cr-notas').value, supervisor: S.supervisor?.nombre });
+  await apiPost({ action:'saveAvance', empId: S.currentEmp.EMP_ID, artId: S.currentArt.ART_ID, estado: S.avanceSelected, tiempo, notas: document.getElementById('cr-notas').value, supervisor: S.supervisor?.nombre });
   doneLoading();
   toast('Avance guardado ✓');
-  // Actualizar progreso local
   const idx = S.progresoEmp.findIndex(p=>p.ART_ID===S.currentArt.ART_ID);
   if (idx>=0) S.progresoEmp[idx].ESTADO = S.avanceSelected; else S.progresoEmp.push({ART_ID:S.currentArt.ART_ID,ESTADO:S.avanceSelected});
   S.avanceSelected = null;
   document.getElementById('cr-notas').value = '';
+  timerReset();
   goBack();
 }
 function loadCRegister() {
@@ -920,6 +1136,7 @@ function loadCRegister() {
   document.getElementById('cr-emp-name').textContent = S.currentEmp.NOMBRE;
   ['vista','practicado','dominado'].forEach(k => document.getElementById('cr-'+k).className = 'btn btn-light');
   S.avanceSelected = null;
+  timerReset();
 }
 
 // ════════════════════════════════════════════
