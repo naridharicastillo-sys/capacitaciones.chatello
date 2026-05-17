@@ -79,6 +79,56 @@ textarea.inp{min-height:80px;resize:none}
 .kp{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:270px;margin:20px auto 0}
 .kk{aspect-ratio:1;border-radius:50%;border:none;font-size:24px;font-weight:400;cursor:pointer;background:#fff;color:var(--cafe);box-shadow:0 2px 8px rgba(0,0,0,.1);transition:.1s;font-family:inherit}
 .kk:active{background:var(--crema-dark);transform:scale(.95)}
+/* OPERACIONES */
+.topbar.mod-ops{background:#2d6a4f}
+.ops-tipo-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:4px}
+.ops-tipo-btn{padding:12px 8px;border:1.5px solid var(--crema-dark);border-radius:13px;background:#fff;font-size:13px;font-weight:600;cursor:pointer;text-align:center;line-height:1.3;color:var(--texto);transition:.15s}
+.ops-tipo-btn.sel{background:#2d6a4f;color:#fff;border-color:#2d6a4f}
+.ops-chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+.ops-chip{padding:7px 14px;border:1.5px solid var(--crema-dark);border-radius:20px;font-size:13px;cursor:pointer;background:#fff;transition:.15s}
+.ops-chip.sel{background:#2d6a4f;color:#fff;border-color:#2d6a4f}
+.ops-task{background:#fff;border-radius:13px;padding:13px 14px;margin-bottom:10px;border:1.5px solid var(--crema-dark);transition:border-color .2s}
+.ops-task.estado-hecho{border-color:#81c784;background:#f1f8f1}
+.ops-task.estado-timing{border-color:#ffb300;background:#fffde7}
+.ops-task.estado-medias{border-color:#ff9800;background:#fff8f0}
+.ops-task.estado-mal{border-color:#ef9a9a;background:#fce4ec}
+.ops-task-nombre{font-size:14px;font-weight:700;margin-bottom:3px}
+.ops-task-fase{font-size:10px;font-weight:700;color:var(--gris);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px}
+.ops-task-desc{font-size:12px;color:var(--gris);line-height:1.4;margin-bottom:8px}
+.ops-task-tiempo{font-size:11px;color:#2d6a4f;font-weight:600;margin-bottom:8px}
+.ops-emp-sel{width:100%;padding:9px 12px;border:1.5px solid var(--crema-dark);border-radius:9px;font-size:13px;background:#fff;color:var(--texto);margin-bottom:8px;-webkit-appearance:none;appearance:none}
+.ops-state-row{display:flex;gap:6px;margin-bottom:6px}
+.ops-sb{flex:1;padding:8px 2px;border:1.5px solid var(--crema-dark);border-radius:9px;font-size:11px;font-weight:700;cursor:pointer;text-align:center;background:#fff;transition:.15s;line-height:1.2}
+.ops-sb:active{opacity:.7}
+.ops-sb.s-hecho{background:#e6f4ea;border-color:#66bb6a;color:#2e7d32}
+.ops-sb.s-timing{background:#fffde7;border-color:#ffb300;color:#795548}
+.ops-sb.s-medias{background:#fff3e0;border-color:#ff9800;color:#e65100}
+.ops-sb.s-mal{background:#fce4ec;border-color:#ef9a9a;color:#c62828}
+.ops-note{width:100%;padding:9px 12px;border:1.5px solid var(--crema-dark);border-radius:9px;font-size:13px;margin-top:4px;font-family:inherit;resize:none;background:#fff;color:var(--texto)}
+.ops-summary-bar{display:flex;gap:7px;padding:10px 0;flex-wrap:wrap}
+.ops-stat{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:12px;font-size:12px;font-weight:700}
+.ops-stat-hecho{background:#e6f4ea;color:#2e7d32}
+.ops-stat-timing{background:#fffde7;color:#795548}
+.ops-stat-medias{background:#fff3e0;color:#e65100}
+.ops-stat-mal{background:#fce4ec;color:#c62828}
+.ops-stat-pend{background:#f0ebe3;color:#5c3a21}
+/* Emp profile */
+.emp-avatar-lg{width:56px;height:56px;border-radius:50%;background:#f5e9df;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#5c3a21;flex-shrink:0}
+.emp-stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.emp-stat-box{background:#f5f5f0;border-radius:10px;padding:10px 6px;text-align:center}
+.emp-stat-num{font-size:22px;font-weight:700;color:#5c3a21}
+.emp-stat-lbl{font-size:10px;color:var(--gris);margin-top:2px}
+.retro-item{border-left:3px solid var(--naranja);padding:9px 12px;margin-bottom:8px;background:#fdf6ef;border-radius:0 10px 10px 0}
+.retro-item.retro-pos{border-left-color:#4caf50;background:#f1f8f1}
+.retro-sup{font-size:11px;font-weight:700;color:#5c3a21}
+.retro-txt{font-size:13px;line-height:1.5;margin-top:3px}
+.retro-date{font-size:11px;color:var(--gris);margin-top:3px}
+.desc-card{border:2px solid var(--naranja);border-radius:13px;padding:14px;background:#fdf6ef}
+.enc-btn-row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.enc-btn{padding:8px 15px;border:1.5px solid var(--naranja);border-radius:20px;font-size:13px;cursor:pointer;background:#fff;color:var(--cafe);font-weight:600;transition:.15s}
+.enc-btn.sel{background:#5c3a21;color:#fff;border-color:#5c3a21}
+.wa-card-hidden{position:fixed;left:-9999px;top:-9999px;width:340px;background:#fff;font-family:-apple-system,sans-serif}
+
 .kk.empty{background:transparent;box-shadow:none;pointer-events:none}
 /* EVAL */
 .ev-item{background:#fff;border-radius:13px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -155,6 +205,7 @@ textarea.inp{min-height:80px;resize:none}
     <button class="btn btn-light" onclick="goTo('s-c-list')"><span class="btn-icon">📚</span><div class="btn-text">Capacitar<small>Artículos y recetas</small></div><span style="color:var(--gris)">›</span></button>
     <button class="btn btn-light" onclick="goTo('s-e-list')"><span class="btn-icon">⭐</span><div class="btn-text">Evaluar<small>Evaluación de artículos</small></div><span style="color:var(--gris)">›</span></button>
     <button class="btn btn-light" onclick="goTo('s-mc-search')"><span class="btn-icon">💡</span><div class="btn-text">Mejora Continua<small>Dudas y protocolos</small></div><span style="color:var(--gris)">›</span></button>
+    <button class="btn btn-light" onclick="goTo('s-ops-home')"><span class="btn-icon">✅</span><div class="btn-text">Operaciones<small>Aperturas, cierres y mantenimiento</small></div><span style="color:var(--gris)">›</span></button>
   </div>
 </div>
 
@@ -516,6 +567,12 @@ const S = {
   evalState: { ing: null, pro: null, est: null, tie: null },
   avanceSelected: null,
   checklist: [],
+  opsConfig: { tipo: '', sucursal: '', equipo: [], fecha: '' },
+  opsTareas: {},
+  opsEmpActual: null,
+  opsDescuentoSel: [],
+  opsRetroTipo: 'positiva',
+  opsRevisiones: [],
 };
 
 // Checklist día 1 — ítems fijos
@@ -622,6 +679,10 @@ function loadScreen(id) {
     case 's-p-decision': loadPDecision(); break;
     case 's-p-interview': loadPInterview(); break;
     case 's-i-retro': loadIRetro(); break;
+    case 's-ops-home': loadOpsHome(); break;
+    case 's-ops-tasks': loadOpsTasks(); break;
+    case 's-ops-emp': loadOpsEmp(); break;
+    case 's-ops-equipo': loadOpsEquipo(); break;
   }
 }
 
@@ -1282,6 +1343,553 @@ async function saveDuda() {
   goBack();
 }
 
+
+// ════════════════════════════════════════════
+// OPERACIONES — DATOS
+// ════════════════════════════════════════════
+const OPS_TIPOS_INFO = {
+  'apertura':      { label:'Apertura',          icon:'🌅' },
+  'cierre-mat':    { label:'Cierre Matutino',   icon:'☀️' },
+  'cambio':        { label:'Cambio de Turno',   icon:'🔄' },
+  'cierre-ves':    { label:'Cierre Vespertino', icon:'🌙' },
+  'mantenimiento': { label:'Mantenimiento',     icon:'🔧' },
+};
+
+const OPS_TASKS = {
+  'apertura': [
+    {id:'AP-01',fase:'Fase 1',nombre:'Abrir y calentar caldera espresso',desc:'Retirar garrafón y reemplazar con uno completo (nunca menos de 20 cm). Encender botón inferior, esperar y luego encender botón de en medio (resistencia).',tiempo:'2 min · Barista'},
+    {id:'AP-02',fase:'Fase 2',nombre:'Barrer área de mesas y baño',desc:'1) Levantar objetos para barrer. 2) Pasar escoba por debajo de patas y mesas. 3) Tirar basura y dejar herramientas limpias.',tiempo:'10 min'},
+    {id:'AP-03',fase:'Fase 2',nombre:'Trapear área de mesas y baño',desc:'Llenar dos cubetas con agua limpia. Trapear piso de mesas y baño.',tiempo:'15 min'},
+    {id:'AP-04',fase:'Fase 2',nombre:'Lavar baños',desc:'1) Barrer y trapear. 2) Tallar interior de taza con cloro. 3) Limpiar lavabo y espejo. 4) Reponer papel y jabón.',tiempo:'10 min'},
+    {id:'AP-05',fase:'Fase 3',nombre:'Sacudir y acomodar mesas',desc:'1) Rellenar centros de mesa con azúcar. 2) Limpiar mesas y sillas con trapo húmedo. 3) Acomodar servilletas, manteles y sillas.',tiempo:'4 min'},
+    {id:'AP-06',fase:'Fase 3',nombre:'Abrir caja',desc:'Contar dinero, revisar feria y cambio en caja, revisar batería de terminal. Anotar fondo inicial.',tiempo:'15 min · Encargado'},
+    {id:'AP-07',fase:'Fase 3',nombre:'Revisión stock barra',desc:'Verificar disponibilidad de leche, jarabes, hielos, vasos, popotes, servilletas e insumos de barra.',tiempo:'10 min · Barista'},
+    {id:'AP-08',fase:'Fase 4',nombre:'Revisión stock cocina',desc:'Revisar lista de acciones diarias. Organizar trapos húmedos, botes de basura, cucharones y sartenes.',tiempo:'10 min · Cocinero'},
+    {id:'AP-09',fase:'Fase 4',nombre:'Sacudir barra de recepción',desc:'Limpiar barra de recepción con trapo húmedo. Acomodar menús y material de trabajo.',tiempo:'5 min'},
+    {id:'AP-10',fase:'Fase 4',nombre:'Barrer calle',desc:'Barrer la banqueta y zona exterior de la cafetería.',tiempo:'15 min'},
+    {id:'AP-11',fase:'Fase 5',nombre:'Revisar activaciones Rappi y Uber',desc:'Activar o desactivar artículos según existencia. Verificar menú actualizado en plataformas.',tiempo:'5 min · Encargado'},
+    {id:'AP-12',fase:'Fase 5',nombre:'Pulir cubiertos y cristalería',desc:'Pasar trapo húmedo por cubiertos y limpiar vasos con trapo seco.',tiempo:'15 min'},
+    {id:'AP-13',fase:'Fase 5',nombre:'Limpiar menús y portacuentas',desc:'Con trapo húmedo limpiar hoja por hoja y portacuentas.',tiempo:'2 min'},
+    {id:'AP-14',fase:'Fase 5',nombre:'Lotear postres',desc:'Seleccionar postres más antiguos y registrar los disponibles para el día.',tiempo:'2 min'},
+  ],
+  'cierre-mat': [
+    {id:'CM-01',fase:'Fase 1',nombre:'Lavar loza',desc:'Lavar con jabón y fibra platos, ollas y utensilios. Dejar tarjas sin residuos.',tiempo:'20 min – 1 hr'},
+    {id:'CM-02',fase:'Fase 2',nombre:'Lavar mesas de trabajo de cocina y barra',desc:'Retirar objetos, lavar con trapo húmedo y jabón.',tiempo:'10 min'},
+    {id:'CM-03',fase:'Fase 2',nombre:'Vaciar botes de basura',desc:'De todos los botes sin excepción. Limpiar el interior.',tiempo:'5 min'},
+    {id:'CM-04',fase:'Fase 3',nombre:'Barrer cocina y barra',desc:'1) Levantar objetos. 2) Barrer por toda el área. 3) Tirar basura.',tiempo:'5 min'},
+    {id:'CM-05',fase:'Fase 3',nombre:'Trapear cocina y barra',desc:'Llenar cubetas con agua limpia. Trapear piso de cocina y barra.',tiempo:'10 min'},
+    {id:'CM-06',fase:'Fase 4',nombre:'Lavar trapos',desc:'Tallar con agua y jabón para eliminar suciedad. Dejar escurriendo.',tiempo:'5 min'},
+    {id:'CM-07',fase:'Fase 4',nombre:'Lavar licuadora y malteadora',desc:'Tallar con fibra y jabón por dentro y por fuera. Secar completamente.',tiempo:'5 min'},
+    {id:'CM-08',fase:'Fase 4',nombre:'Hacer lista de producción',desc:'Anotar el pedido de insumos de cocina y verificar stocks.',tiempo:'5 min'},
+    {id:'CM-09',fase:'Fase 4',nombre:'Limpiar panineras',desc:'Con cucharón de plástico retirar residuos. Nunca usar herramientas metálicas en zona de teflón.',tiempo:'10 min · Cocinero'},
+    {id:'CM-10',fase:'Fase 5',nombre:'Pulir cubiertos y cristalería',desc:'Pasar trapo húmedo por cubiertos y limpiar vasos.',tiempo:'10 min'},
+    {id:'CM-11',fase:'Fase 5',nombre:'Dejar insumos listos para siguiente turno',desc:'Verificar que todos los insumos estén disponibles para el turno vespertino.',tiempo:'10 min · Cocinero y Barista'},
+    {id:'CM-12',fase:'Fase 5',nombre:'Hacer corte de turno',desc:'Retirar efectivo excedente. Hacer corte de medios de pago. Registrar.',tiempo:'Encargado'},
+  ],
+  'cambio': [
+    {id:'CT-01',fase:'Fase 1',nombre:'Cambiar garrafón máquina espresso',desc:'Verificar nivel de agua y reemplazar garrafón si es necesario.',tiempo:'5 min · Barista'},
+    {id:'CT-02',fase:'Fase 2',nombre:'Abrir caja',desc:'Contar dinero, revisar feria y cambio, revisar batería de terminal.',tiempo:'5 min · Encargado'},
+    {id:'CT-03',fase:'Fase 2',nombre:'Sacudir mesas y rellenar azúcar y servilletas',desc:'Rellenar azúcares, acomodar servilletas y limpiar mesas con trapo húmedo.',tiempo:'8 min'},
+    {id:'CT-04',fase:'Fase 2',nombre:'Barrer toda la cafetería',desc:'1) Levantar objetos. 2) Barrer toda la cafetería. 3) Tirar basura.',tiempo:'15 min'},
+    {id:'CT-05',fase:'Fase 3',nombre:'Trapear toda la cafetería',desc:'Llenar dos cubetas con agua limpia. Trapear todo el piso.',tiempo:'15 min'},
+    {id:'CT-06',fase:'Fase 3',nombre:'Pulir cubiertos y cristalería',desc:'Pasar trapo húmedo por cubiertos y limpiar vasos con trapo seco.',tiempo:'15 min'},
+    {id:'CT-07',fase:'Fase 4',nombre:'Lavar baños',desc:'1) Barrer y trapear. 2) Tallar interior de taza. 3) Limpiar lavabo y espejo. 4) Reponer papel y jabón.',tiempo:'10 min'},
+    {id:'CT-08',fase:'Fase 4',nombre:'Lavar y programar cafeteras americano',desc:'Lavar la jarra, pesar café en filtro y programar la cafetera.',tiempo:'5 min'},
+    {id:'CT-09',fase:'Fase 5',nombre:'Limpiar menús y portacuentas',desc:'Con trapo húmedo limpiar hoja por hoja y portacuentas.',tiempo:'5 min'},
+    {id:'CT-10',fase:'Fase 5',nombre:'Recibir y ordenar producción',desc:'Cotejar que venga todo lo marcado en la lista. Organizar en refrigerador y área de trabajo.',tiempo:'15 min'},
+    {id:'CT-11',fase:'Fase 6',nombre:'Revisión stock cocina',desc:'Verificar disponibilidad de insumos de cocina para el turno vespertino.',tiempo:'10 min'},
+    {id:'CT-12',fase:'Fase 6',nombre:'Revisión stock barra',desc:'Verificar disponibilidad de insumos de barra para el turno vespertino.',tiempo:'10 min'},
+    {id:'CT-13',fase:'Fase 7',nombre:'Revisar activaciones Rappi y Uber',desc:'Activar o desactivar artículos según existencia disponible.',tiempo:'5 min'},
+  ],
+  'cierre-ves': [
+    {id:'CV-01',fase:'Fase 1',nombre:'Lavar loza',desc:'Lavar con jabón y fibra platos, ollas y utensilios. Dejar tarjas sin residuos.',tiempo:'20 min – 1 hr'},
+    {id:'CV-02',fase:'Fase 1',nombre:'Dejar insumos listos para siguiente turno',desc:'Verificar que todos los insumos estén disponibles y listos.',tiempo:'10 min'},
+    {id:'CV-03',fase:'Fase 1',nombre:'Lavar mesas de trabajo',desc:'Retirar objetos de mesas de cocina y barra. Lavar con trapo y jabón.',tiempo:'10 min'},
+    {id:'CV-04',fase:'Fase 2',nombre:'Barrer cocina, barra y tarjas',desc:'1) Levantar objetos. 2) Barrer toda el área. 3) Tirar basura.',tiempo:'10 min'},
+    {id:'CV-05',fase:'Fase 2',nombre:'Trapear cocina y barra',desc:'Llenar cubeta con agua limpia. Trapear piso completamente.',tiempo:'15 min'},
+    {id:'CV-06',fase:'Fase 2',nombre:'Lavar licuadora y malteadora',desc:'Tallar con fibra y jabón por dentro y por fuera. Secar.',tiempo:'5 min'},
+    {id:'CV-07',fase:'Fase 3',nombre:'Subir sillas de comensales',desc:'Subir una silla para avisar el cierre y continuar conforme se desocupen mesas.',tiempo:'5 min'},
+    {id:'CV-08',fase:'Fase 3',nombre:'Hacer lista de producción',desc:'Anotar el pedido de insumos de cocina y verificar stocks para el día siguiente.',tiempo:'8 min'},
+    {id:'CV-09',fase:'Fase 3',nombre:'Vaciar botes de basura',desc:'De todos los botes sin excepción. Reutilizar bolsas sin residuos líquidos.',tiempo:'5 min'},
+    {id:'CV-10',fase:'Fase 3',nombre:'Limpiar panineras',desc:'Con cucharón de plástico retirar residuos. Nunca usar herramientas metálicas en zona de teflón.',tiempo:'10 min · Cocinero'},
+    {id:'CV-11',fase:'Fase 4',nombre:'Lavar trapos',desc:'Tallar con agua y jabón. Dejar escurriendo para el día siguiente.',tiempo:'5 min'},
+    {id:'CV-12',fase:'Fase 4',nombre:'Limpiar máquina espresso y apagar maquinaria',desc:'1) Purgar la máquina. 2) Tallar cabezales. 3) Apagar toda la maquinaria en orden.',tiempo:'10 min'},
+    {id:'CV-13',fase:'Fase 4',nombre:'Hacer corte de turno',desc:'Retirar efectivo excedente. Hacer corte de medios de pago. Registrar y guardar.',tiempo:'Encargado'},
+  ],
+  'mantenimiento': [
+    {id:'MT-00',fase:'Diario',nombre:'Regar plantas generales',desc:'Regar todas las plantas verificando que la tierra esté húmeda pero no encharcada.',tiempo:'Diario'},
+    {id:'MT-01',fase:'Diario',nombre:'Regar plantas colgantes',desc:'Regar con cuidado para no mojar clientes ni área de trabajo.',tiempo:'Diario'},
+    {id:'MT-02',fase:'Diario',nombre:'Limpiar filtros de máquina',desc:'Limpiar los filtros de la máquina espresso para mantener la calidad del café.',tiempo:'Diario'},
+    {id:'MT-03',fase:'Semanal',nombre:'Limpiar vitrina',desc:'Limpiar interior y exterior de la vitrina de postres con producto adecuado.',tiempo:'Semanal'},
+    {id:'MT-04',fase:'Semanal',nombre:'Limpiar congelador',desc:'Descongelar y limpiar interior. Revisar fechas de productos.',tiempo:'Semanal'},
+    {id:'MT-05',fase:'Semanal',nombre:'Limpiar paredes',desc:'Limpiar paredes del área de cocina y barra con trapo húmedo.',tiempo:'Semanal'},
+    {id:'MT-06',fase:'Semanal',nombre:'Lavar repisas de cocina',desc:'Retirar todo lo que está sobre las repisas y lavar con agua y jabón.',tiempo:'Semanal'},
+    {id:'MT-07',fase:'Semanal',nombre:'Limpiar bodega',desc:'Organizar y limpiar la bodega. Verificar fechas de caducidad.',tiempo:'Semanal'},
+    {id:'MT-08',fase:'Semanal',nombre:'Limpiar ventanales',desc:'Limpiar vidrios por dentro y por fuera con limpiavidrios.',tiempo:'Semanal'},
+    {id:'MT-09',fase:'Semanal',nombre:'Limpiar estufa',desc:'Limpiar completamente la estufa: parrillas, quemadores y exterior.',tiempo:'Semanal'},
+    {id:'MT-10',fase:'Semanal',nombre:'Lavar botes de basura',desc:'Lavar con agua y jabón todos los botes por dentro y por fuera.',tiempo:'Semanal'},
+    {id:'MT-11',fase:'Semanal',nombre:'Limpiar ventiladores',desc:'Limpiar aspas y carcasa con trapo húmedo.',tiempo:'Semanal'},
+    {id:'MT-12',fase:'Semanal',nombre:'Limpiar refrigeradores',desc:'Limpiar interior y exterior. Verificar temperatura y fechas.',tiempo:'Semanal'},
+    {id:'MT-13',fase:'Semanal',nombre:'Insumos debajo de barras',desc:'Revisar y organizar los insumos almacenados debajo de las barras.',tiempo:'Semanal'},
+    {id:'MT-14',fase:'Semanal',nombre:'Limpiar sillas',desc:'Limpiar todas las sillas con trapo húmedo y verificar su estado.',tiempo:'Semanal'},
+    {id:'MT-15',fase:'Semanal',nombre:'Limpiar hojas de plantas',desc:'Limpiar las hojas con trapo húmedo para quitarles el polvo.',tiempo:'Semanal'},
+    {id:'MT-16',fase:'Semanal',nombre:'Limpiar horno y hornito',desc:'Limpiar interior y exterior. Verificar funcionamiento.',tiempo:'Semanal'},
+    {id:'MT-17',fase:'Semanal',nombre:'Degustación',desc:'Preparar y ofrecer degustación de productos nuevos o especiales.',tiempo:'Semanal'},
+    {id:'MT-18',fase:'Semanal',nombre:'Lavar trapeadores',desc:'Lavar con agua y jabón, desinfectar y dejar secar al sol.',tiempo:'Semanal'},
+  ]
+};
+
+// ════════════════════════════════════════════
+// OPERACIONES — FUNCIONES
+// ════════════════════════════════════════════
+function loadOpsHome() {
+  // Set today's date
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('ops-fecha').value = today;
+  S.opsConfig = { tipo:'', sucursal:'', equipo:[], fecha: today };
+  S.opsTareas = {};
+  // Reset tipo buttons
+  document.querySelectorAll('.ops-tipo-btn').forEach(b => b.classList.remove('sel'));
+  // Reset sucursal chips
+  document.querySelectorAll('#ops-sucursal-chips .ops-chip').forEach(c => c.classList.remove('sel'));
+  // Build equipo chips from empleados
+  renderOpsEquipoChips();
+}
+
+function renderOpsEquipoChips() {
+  const cont = document.getElementById('ops-equipo-list');
+  const activos = (S.empleados||[]).filter(e => e.ESTATUS === 'Activo');
+  cont.innerHTML = activos.map(e => {
+    const initials = e.NOMBRE.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+    return `<div class="ops-chip" data-id="${e.EMP_ID}" data-nombre="${e.NOMBRE}" onclick="toggleEquipoMember(this)">${initials} ${e.NOMBRE.split(' ')[0]}</div>`;
+  }).join('') || '<div style="font-size:13px;color:var(--gris)">No hay empleados activos cargados.</div>';
+}
+
+function selectOpsTipo(tipo, btn) {
+  S.opsConfig.tipo = tipo;
+  document.querySelectorAll('.ops-tipo-btn').forEach(b => b.classList.remove('sel'));
+  btn.classList.add('sel');
+}
+
+function selectOpsChip(el, field, val) {
+  const siblings = el.closest('.ops-chip-row').querySelectorAll('.ops-chip');
+  siblings.forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+  S.opsConfig[field] = val;
+}
+
+function toggleEquipoMember(el) {
+  el.classList.toggle('sel');
+  const id = el.dataset.id;
+  const nombre = el.dataset.nombre;
+  const idx = S.opsConfig.equipo.findIndex(e => e.id === id);
+  if (idx >= 0) S.opsConfig.equipo.splice(idx, 1);
+  else S.opsConfig.equipo.push({ id, nombre });
+}
+
+function iniciarRevision() {
+  if (!S.opsConfig.tipo) { toast('Selecciona el tipo de revisión'); return; }
+  if (!S.opsConfig.sucursal) { toast('Selecciona la sucursal'); return; }
+  S.opsConfig.fecha = document.getElementById('ops-fecha').value || new Date().toISOString().split('T')[0];
+  S.opsTareas = {};
+  goTo('s-ops-tasks');
+}
+
+function loadOpsTasks() {
+  const cfg = S.opsConfig;
+  const info = OPS_TIPOS_INFO[cfg.tipo] || { label: cfg.tipo, icon: '📋' };
+  document.getElementById('ops-tasks-title').textContent = info.icon + ' ' + info.label;
+  document.getElementById('ops-tasks-sub').textContent = cfg.sucursal + ' · ' + (cfg.fecha || '—') + ' · ' + (S.supervisor?.nombre || '');
+  renderOpsTasks();
+  renderOpsSummary();
+}
+
+function renderOpsTasks() {
+  const tasks = OPS_TASKS[S.opsConfig.tipo] || [];
+  const equipo = S.opsConfig.equipo;
+  let html = '';
+  let lastFase = '';
+  tasks.forEach(t => {
+    if (t.fase !== lastFase) {
+      html += `<div class="stitle"${lastFase?'':' style="margin-top:0"'}>${t.fase}</div>`;
+      lastFase = t.fase;
+    }
+    const estado = S.opsTareas[t.id]?.estado || '';
+    const empId = S.opsTareas[t.id]?.empId || '';
+    const nota = S.opsTareas[t.id]?.nota || '';
+    const estadoClass = estado ? 'estado-' + estado : '';
+    const empOptions = equipo.length
+      ? `<option value="">— ¿Quién lo realizó? —</option>` + equipo.map(e => `<option value="${e.id}" ${empId===e.id?'selected':''}>${e.nombre}</option>`).join('')
+      : `<option value="">Sin equipo seleccionado</option>`;
+    const showNote = estado && estado !== 'hecho';
+    html += `<div class="ops-task ${estadoClass}" id="task-block-${t.id}">
+      <div class="ops-task-fase">${t.fase}</div>
+      <div class="ops-task-nombre">${t.nombre}</div>
+      <div class="ops-task-desc">${t.desc}</div>
+      <div class="ops-task-tiempo">⏱ ${t.tiempo}</div>
+      <select class="ops-emp-sel" id="emp-${t.id}" onchange="setTareaEmp('${t.id}',this.value)">${empOptions}</select>
+      <div class="ops-state-row">
+        <button class="ops-sb ${estado==='hecho'?'s-hecho':''}" onclick="setEstado('${t.id}','hecho',this)">✓<br>Hecho</button>
+        <button class="ops-sb ${estado==='timing'?'s-timing':''}" onclick="setEstado('${t.id}','timing',this)">⏱<br>Timing</button>
+        <button class="ops-sb ${estado==='medias'?'s-medias':''}" onclick="setEstado('${t.id}','medias',this)">~<br>A medias</button>
+        <button class="ops-sb ${estado==='mal'?'s-mal':''}" onclick="setEstado('${t.id}','mal',this)">✗<br>Mal/No</button>
+      </div>
+      <textarea class="ops-note" id="nota-${t.id}" placeholder="Nota (opcional para timing/medias, requerida para mal)..." style="display:${showNote?'block':'none'}" onchange="setTareaNota('${t.id}',this.value)">${nota}</textarea>
+    </div>`;
+  });
+  document.getElementById('ops-tasks-list').innerHTML = html;
+}
+
+function setEstado(taskId, estado, btn) {
+  if (!S.opsTareas[taskId]) S.opsTareas[taskId] = {};
+  S.opsTareas[taskId].estado = estado;
+  // Update button styles
+  const block = document.getElementById('task-block-' + taskId);
+  block.className = 'ops-task estado-' + estado;
+  block.querySelectorAll('.ops-sb').forEach(b => {
+    b.className = 'ops-sb';
+    if (b.onclick.toString().includes("'" + estado + "'")) {
+      b.classList.add('s-' + estado);
+    }
+  });
+  // Show/hide note
+  const noteEl = document.getElementById('nota-' + taskId);
+  noteEl.style.display = estado !== 'hecho' ? 'block' : 'none';
+  renderOpsSummary();
+}
+
+function setTareaEmp(taskId, empId) {
+  if (!S.opsTareas[taskId]) S.opsTareas[taskId] = {};
+  S.opsTareas[taskId].empId = empId;
+}
+
+function setTareaNota(taskId, nota) {
+  if (!S.opsTareas[taskId]) S.opsTareas[taskId] = {};
+  S.opsTareas[taskId].nota = nota;
+}
+
+function renderOpsSummary() {
+  const tasks = OPS_TASKS[S.opsConfig.tipo] || [];
+  let counts = { hecho:0, timing:0, medias:0, mal:0, pend:0 };
+  tasks.forEach(t => {
+    const e = S.opsTareas[t.id]?.estado;
+    if (e) counts[e] = (counts[e]||0)+1; else counts.pend++;
+  });
+  let html = '';
+  if (counts.hecho) html += `<span class="ops-stat ops-stat-hecho">✓ ${counts.hecho} OK</span>`;
+  if (counts.timing) html += `<span class="ops-stat ops-stat-timing">⏱ ${counts.timing}</span>`;
+  if (counts.medias) html += `<span class="ops-stat ops-stat-medias">~ ${counts.medias}</span>`;
+  if (counts.mal) html += `<span class="ops-stat ops-stat-mal">✗ ${counts.mal}</span>`;
+  if (counts.pend) html += `<span class="ops-stat ops-stat-pend">${counts.pend} pendientes</span>`;
+  document.getElementById('ops-summary-bar').innerHTML = html;
+}
+
+async function guardarRevision() {
+  const tasks = OPS_TASKS[S.opsConfig.tipo] || [];
+  const cfg = S.opsConfig;
+  if (!tasks.length) { toast('Sin tareas para guardar'); return; }
+  loading('Guardando revisión...');
+  const rows = tasks.map(t => {
+    const tr = S.opsTareas[t.id] || {};
+    const empNombre = cfg.equipo.find(e => e.id === tr.empId)?.nombre || '';
+    return {
+      action: 'saveOperacion',
+      supervisor: S.supervisor?.nombre || '',
+      tipo: cfg.tipo,
+      tipoLabel: OPS_TIPOS_INFO[cfg.tipo]?.label || cfg.tipo,
+      sucursal: cfg.sucursal,
+      fecha: cfg.fecha,
+      tareaId: t.id,
+      tareaNombre: t.nombre,
+      tareaFase: t.fase,
+      estado: tr.estado || 'pendiente',
+      empId: tr.empId || '',
+      empNombre,
+      nota: tr.nota || ''
+    };
+  });
+  // Save all rows
+  for (const row of rows) {
+    await apiPost(row);
+  }
+  doneLoading();
+  toast('Revisión guardada ✓');
+  goToMenu();
+}
+
+// ─── EQUIPO ───────────────────────────────────────────────────
+function loadOpsEquipo() {
+  filterOpsEquipo();
+}
+
+function filterOpsEquipo() {
+  const q = (document.getElementById('ops-emp-search')?.value||'').toLowerCase();
+  const list = (S.empleados||[]).filter(e => e.ESTATUS==='Activo' && e.NOMBRE.toLowerCase().includes(q));
+  document.getElementById('ops-equipo-items').innerHTML = list.map(e =>
+    `<div class="li" onclick="verPerfilEmp('${e.EMP_ID}')">
+      <div class="li-left"><div class="li-name">${e.NOMBRE}</div><div class="li-sub">${e.PUESTO||'—'}</div></div>
+      <span style="color:var(--gris)">›</span>
+    </div>`
+  ).join('') || '<div class="empty"><p>No hay empleados activos.</p></div>';
+}
+
+async function verPerfilEmp(empId) {
+  const emp = (S.empleados||[]).find(e => e.EMP_ID === empId);
+  if (!emp) return;
+  S.opsEmpActual = emp;
+  S.opsDescuentoSel = [];
+  S.opsRetroTipo = 'positiva';
+  loading('Cargando perfil...');
+  const [ops, retros, prog, desc] = await Promise.all([
+    apiGet({ action:'getOperaciones', empId }),
+    apiGet({ action:'getRetros', empId }),
+    apiGet({ action:'getProgreso', empId }),
+    apiGet({ action:'getDescuentos', empId }),
+  ]);
+  S.opsRevisiones = ops || [];
+  S.retros = retros || [];
+  S.progresoEmp = prog || [];
+  S.opsDescuentoActual = desc || null;
+  doneLoading();
+  goTo('s-ops-emp', true);
+  loadOpsEmp();
+}
+
+function loadOpsEmp() {
+  const emp = S.opsEmpActual;
+  if (!emp) return;
+  const initials = emp.NOMBRE.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+  document.getElementById('oemp-avatar').textContent = initials;
+  document.getElementById('oemp-nombre').textContent = emp.NOMBRE;
+  document.getElementById('oemp-puesto').textContent = (emp.PUESTO||'—') + (emp.TURNO ? ' · '+emp.TURNO : '');
+  document.getElementById('oemp-title').textContent = emp.NOMBRE.split(' ')[0];
+  document.getElementById('oemp-sub').textContent = emp.PUESTO || '—';
+
+  // Stats
+  const revs = S.opsRevisiones || [];
+  const totalTasks = revs.length;
+  const okTasks = revs.filter(r => r.ESTADO === 'hecho').length;
+  const pct = totalTasks ? Math.round(okTasks/totalTasks*100) : '—';
+  const prog = S.progresoEmp || [];
+  document.getElementById('oemp-stat-rev').textContent = totalTasks;
+  document.getElementById('oemp-stat-ok').textContent = totalTasks ? pct+'%' : '—';
+  document.getElementById('oemp-stat-cap').textContent = prog.filter(p=>p.ESTADO==='Dominado').length;
+
+  // Encargados buttons (from supervisores in S or hardcoded list)
+  const encargados = ['Ari', 'Marco', 'Paola', 'Diego'];
+  const selEnc = S.opsDescuentoActual?.ENCARGADOS ? S.opsDescuentoActual.ENCARGADOS.split(',') : [];
+  S.opsDescuentoSel = [...selEnc];
+  document.getElementById('oemp-enc-btns').innerHTML = encargados.map(e =>
+    `<button class="enc-btn ${selEnc.includes(e)?'sel':''}" onclick="toggleEncargado(this,'${e}')">${e}</button>`
+  ).join('');
+  updateDescuentoStatus();
+
+  // Retros
+  const retros = S.retros || [];
+  document.getElementById('oemp-retros-list').innerHTML = retros.slice().reverse().slice(0,5).map(r => {
+    const tags = (() => { try { return JSON.parse(r.TAGS||'[]'); } catch(e) { return []; } })();
+    const isPos = tags.includes('positiva') || tags.includes('felicitacion');
+    return `<div class="retro-item ${isPos?'retro-pos':''}">
+      <div class="retro-sup">${r.SUPERVISOR||'Supervisor'} · ${r.FECHA||'—'}</div>
+      <div class="retro-txt">${r.NOTAS||'—'}</div>
+    </div>`;
+  }).join('') || '<div style="font-size:13px;color:var(--gris);margin-bottom:12px">Sin retroalimentación registrada.</div>';
+
+  // Ops history
+  const groupedOps = {};
+  revs.forEach(r => {
+    const key = r.TIPO + '_' + r.FECHA;
+    if (!groupedOps[key]) groupedOps[key] = { tipo:r.TIPO, tipoLabel:r.TIPO_LABEL||r.TIPO, fecha:r.FECHA, sucursal:r.SUCURSAL, tasks:[] };
+    groupedOps[key].tasks.push(r);
+  });
+  const opsArr = Object.values(groupedOps).slice(0,5);
+  document.getElementById('oemp-ops-list').innerHTML = opsArr.map(g => {
+    const ok = g.tasks.filter(t=>t.ESTADO==='hecho').length;
+    const total = g.tasks.length;
+    const pct = total ? Math.round(ok/total*100) : 0;
+    const bdg = pct>=80?'bdg-ok':pct>=50?'bdg-warn':'bdg-err';
+    return `<div class="card" style="padding:12px 14px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+        <span style="font-size:14px;font-weight:700">${g.tipoLabel||g.tipo}</span>
+        <span class="bdg ${bdg}">${pct}%</span>
+      </div>
+      <div style="font-size:12px;color:var(--gris)">${g.fecha||'—'} · ${g.sucursal||'—'}</div>
+      <div class="prog-bar" style="margin:6px 0 0"><div class="prog-fill" style="width:${pct}%;background:${pct>=80?'#4caf50':pct>=50?'#ff9800':'#f44336'}"></div></div>
+    </div>`;
+  }).join('') || '<div class="empty" style="padding:20px"><p>Sin revisiones registradas.</p></div>';
+
+  // Capacitación por categoría
+  const cats = {};
+  (S.articulos||[]).forEach(a => {
+    if (!cats[a.CATEGORIA]) cats[a.CATEGORIA] = { total:0, dom:0 };
+    cats[a.CATEGORIA].total++;
+  });
+  (S.progresoEmp||[]).filter(p=>p.ESTADO==='Dominado').forEach(p => {
+    const art = (S.articulos||[]).find(a=>a.ART_ID===p.ART_ID);
+    if (art?.CATEGORIA) { if (!cats[art.CATEGORIA]) cats[art.CATEGORIA]={total:0,dom:0}; cats[art.CATEGORIA].dom++; }
+  });
+  document.getElementById('oemp-cap-list').innerHTML = Object.entries(cats).map(([cat,v]) => {
+    const pct = v.total ? Math.round(v.dom/v.total*100) : 0;
+    const color = pct>=80?'#4caf50':pct>=40?'#ff9800':'#c8935a';
+    return `<div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">
+        <span style="font-weight:600">${cat}</span>
+        <span style="color:var(--gris)">${v.dom}/${v.total}</span>
+      </div>
+      <div class="prog-bar" style="margin:0"><div class="prog-fill" style="width:${pct}%;background:${color}"></div></div>
+    </div>`;
+  }).join('') || '<div style="font-size:13px;color:var(--gris)">Sin datos de capacitación.</div>';
+}
+
+function toggleEncargado(btn, nombre) {
+  btn.classList.toggle('sel');
+  const idx = S.opsDescuentoSel.indexOf(nombre);
+  if (idx >= 0) S.opsDescuentoSel.splice(idx, 1);
+  else S.opsDescuentoSel.push(nombre);
+  updateDescuentoStatus();
+}
+
+function updateDescuentoStatus() {
+  const el = document.getElementById('oemp-desc-status');
+  if (S.opsDescuentoSel.length) {
+    el.textContent = '🏷 Activo — autorizado por: ' + S.opsDescuentoSel.join(', ');
+    el.style.color = '#2e7d32';
+  } else {
+    el.textContent = 'Sin descuento esta semana';
+    el.style.color = 'var(--gris)';
+  }
+}
+
+async function saveDescuento() {
+  if (!S.opsEmpActual) return;
+  loading('Guardando...');
+  await apiPost({
+    action: 'saveDescuento',
+    empId: S.opsEmpActual.EMP_ID,
+    nombre: S.opsEmpActual.NOMBRE,
+    encargados: S.opsDescuentoSel.join(','),
+    semana: new Date().toLocaleDateString('es-MX'),
+    supervisor: S.supervisor?.nombre || ''
+  });
+  doneLoading();
+  toast(S.opsDescuentoSel.length ? '🏷 Descuento otorgado ✓' : 'Descuento removido');
+}
+
+function setRetroTipo(tipo) {
+  S.opsRetroTipo = tipo;
+  document.getElementById('retro-pos-btn').style.background = tipo==='positiva' ? '#e6f4ea' : '#fff';
+  document.getElementById('retro-neg-btn').style.background = tipo==='llamada' ? '#fce4ec' : '#fff';
+}
+
+async function saveRetroEmp() {
+  const txt = document.getElementById('oemp-retro-txt').value.trim();
+  if (!txt) { toast('Escribe la retroalimentación'); return; }
+  if (!S.opsEmpActual) return;
+  loading('Guardando...');
+  await apiPost({
+    action: 'saveRetro',
+    empId: S.opsEmpActual.EMP_ID,
+    tags: JSON.stringify([S.opsRetroTipo]),
+    notas: txt,
+    supervisor: S.supervisor?.nombre || ''
+  });
+  doneLoading();
+  toast('Retroalimentación enviada ✓');
+  document.getElementById('oemp-retro-txt').value = '';
+  // Refresh retros
+  const retros = await apiGet({ action:'getRetros', empId: S.opsEmpActual.EMP_ID });
+  S.retros = retros || [];
+  loadOpsEmp();
+}
+
+function generarTarjetaWA() {
+  const emp = S.opsEmpActual;
+  if (!emp) return;
+  const canvas = document.createElement('canvas');
+  canvas.width = 680; canvas.height = 480;
+  const ctx = canvas.getContext('2d');
+  const CAFE = '#5c3a21', NARANJA = '#c8935a', CREMA = '#f5f5f0', VERDE = '#2e7d32';
+
+  // Background
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, 680, 480);
+
+  // Header
+  ctx.fillStyle = CAFE;
+  ctx.fillRect(0, 0, 680, 110);
+  ctx.fillStyle = NARANJA;
+  ctx.font = 'bold 16px -apple-system, sans-serif';
+  ctx.fillText('CHATELLO CAPACITACIONES', 30, 38);
+  ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 26px -apple-system, sans-serif';
+  ctx.fillText(emp.NOMBRE, 30, 72);
+  ctx.font = '15px -apple-system, sans-serif';
+  ctx.fillStyle = 'rgba(245,245,240,0.7)';
+  ctx.fillText((emp.PUESTO||'') + ' · Semana ' + new Date().toLocaleDateString('es-MX'), 30, 96);
+
+  // Stats boxes
+  const revs = S.opsRevisiones || [];
+  const ok = revs.filter(r=>r.ESTADO==='hecho').length;
+  const pct = revs.length ? Math.round(ok/revs.length*100) : 0;
+  const cap = (S.progresoEmp||[]).filter(p=>p.ESTADO==='Dominado').length;
+  const statData = [
+    { label:'Revisiones', val: revs.length },
+    { label:'% Tareas OK', val: pct+'%' },
+    { label:'Arts cap.', val: cap },
+  ];
+  statData.forEach((s, i) => {
+    const x = 30 + i*215;
+    ctx.fillStyle = CREMA;
+    ctx.beginPath(); ctx.roundRect(x, 125, 200, 70, 8); ctx.fill();
+    ctx.fillStyle = CAFE;
+    ctx.font = 'bold 28px -apple-system, sans-serif';
+    ctx.fillText(String(s.val), x+16, 170);
+    ctx.font = '13px -apple-system, sans-serif';
+    ctx.fillStyle = '#7a6a5a';
+    ctx.fillText(s.label, x+16, 188);
+  });
+
+  // Descuento
+  if (S.opsDescuentoSel.length) {
+    ctx.fillStyle = '#fdf6ef';
+    ctx.beginPath(); ctx.roundRect(30, 210, 620, 48, 8); ctx.fill();
+    ctx.strokeStyle = NARANJA; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.roundRect(30, 210, 620, 48, 8); ctx.stroke();
+    ctx.fillStyle = CAFE; ctx.font = 'bold 15px -apple-system, sans-serif';
+    ctx.fillText('🏷 Descuento especial activo — autorizado por: ' + S.opsDescuentoSel.join(', '), 46, 241);
+  }
+
+  // Last retro
+  const retros = S.retros || [];
+  const lastRetro = retros[retros.length-1];
+  if (lastRetro) {
+    const yStart = S.opsDescuentoSel.length ? 275 : 215;
+    ctx.fillStyle = '#fdf6ef';
+    ctx.beginPath(); ctx.roundRect(30, yStart, 620, 90, 8); ctx.fill();
+    ctx.fillStyle = NARANJA; ctx.fillRect(30, yStart, 4, 90);
+    ctx.fillStyle = CAFE; ctx.font = 'bold 13px -apple-system, sans-serif';
+    ctx.fillText('Retroalimentación — ' + (lastRetro.SUPERVISOR||'Supervisor'), 46, yStart+22);
+    ctx.fillStyle = '#2d1f13'; ctx.font = '14px -apple-system, sans-serif';
+    const txt = (lastRetro.NOTAS||'').substring(0,90) + ((lastRetro.NOTAS||'').length>90?'...':'');
+    ctx.fillText(txt, 46, yStart+46);
+    ctx.fillStyle = '#7a6a5a'; ctx.font = '12px -apple-system, sans-serif';
+    ctx.fillText(lastRetro.FECHA||'', 46, yStart+70);
+  }
+
+  // Footer
+  ctx.fillStyle = CREMA;
+  ctx.fillRect(0, 440, 680, 40);
+  ctx.fillStyle = '#7a6a5a'; ctx.font = '12px -apple-system, sans-serif';
+  ctx.fillText('Generado desde Chatello App · ' + new Date().toLocaleDateString('es-MX'), 30, 466);
+
+  // Download
+  const link = document.createElement('a');
+  link.download = 'reporte-' + emp.NOMBRE.replace(/\s+/g,'-').toLowerCase() + '.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+  toast('Tarjeta descargada ✓');
+}
+
 // ════════════════════════════════════════════
 // INIT
 // ════════════════════════════════════════════
@@ -1296,5 +1904,129 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script>
+
+<!-- ══════════════════════════════════════════
+     OPERACIONES — HOME
+══════════════════════════════════════════ -->
+<div id="s-ops-home" class="screen">
+  <div class="topbar mod-ops">
+    <div class="tb-back" onclick="goBack()">‹</div>
+    <div><div class="tb-title">Operaciones</div><div class="tb-sub">Nueva revisión</div></div>
+    <div class="tb-right"><button onclick="goToMenu()" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:7px 10px;border-radius:9px;font-size:14px;cursor:pointer">🏠</button></div>
+  </div>
+  <div class="content">
+    <div class="stitle" style="margin-top:0">Tipo de revisión</div>
+    <div class="ops-tipo-grid">
+      <button class="ops-tipo-btn" onclick="selectOpsTipo('apertura',this)">🌅<br>Apertura</button>
+      <button class="ops-tipo-btn" onclick="selectOpsTipo('cierre-mat',this)">☀️<br>Cierre Matutino</button>
+      <button class="ops-tipo-btn" onclick="selectOpsTipo('cambio',this)">🔄<br>Cambio de Turno</button>
+      <button class="ops-tipo-btn" onclick="selectOpsTipo('cierre-ves',this)">🌙<br>Cierre Vespertino</button>
+    </div>
+    <button class="ops-tipo-btn" style="width:100%;margin-top:0" onclick="selectOpsTipo('mantenimiento',this)">🔧 Mantenimiento</button>
+
+    <div class="stitle">Sucursal</div>
+    <div class="ops-chip-row" id="ops-sucursal-chips">
+      <div class="ops-chip" onclick="selectOpsChip(this,'sucursal','Himno')">Himno</div>
+      <div class="ops-chip" onclick="selectOpsChip(this,'sucursal','Carranza')">Carranza</div>
+      <div class="ops-chip" onclick="selectOpsChip(this,'sucursal','Lomas')">Lomas</div>
+    </div>
+
+    <div class="stitle">Equipo en turno</div>
+    <div style="font-size:12px;color:var(--gris);margin-bottom:8px">Selecciona los empleados que trabajan hoy — sus nombres aparecerán en cada tarea.</div>
+    <div id="ops-equipo-list" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px"></div>
+
+    <div class="stitle">Fecha</div>
+    <input id="ops-fecha" class="inp" type="date">
+
+    <button class="btn btn-dark btn-center" style="margin-top:18px" onclick="iniciarRevision()">Iniciar revisión →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     OPERACIONES — TAREAS
+══════════════════════════════════════════ -->
+<div id="s-ops-tasks" class="screen">
+  <div class="topbar mod-ops">
+    <div class="tb-back" onclick="goBack()">‹</div>
+    <div><div class="tb-title" id="ops-tasks-title">Revisión</div><div class="tb-sub" id="ops-tasks-sub">—</div></div>
+    <div class="tb-right"><button onclick="goToMenu()" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:7px 10px;border-radius:9px;font-size:14px;cursor:pointer">🏠</button></div>
+  </div>
+  <div class="content">
+    <div id="ops-tasks-list"></div>
+    <div class="ops-summary-bar" id="ops-summary-bar"></div>
+    <button class="btn btn-dark btn-center" onclick="guardarRevision()">Guardar revisión ✓</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     OPERACIONES — PERFIL EMPLEADO
+══════════════════════════════════════════ -->
+<div id="s-ops-emp" class="screen">
+  <div class="topbar mod-ops">
+    <div class="tb-back" onclick="goBack()">‹</div>
+    <div><div class="tb-title" id="oemp-title">Perfil</div><div class="tb-sub" id="oemp-sub">—</div></div>
+    <div class="tb-right"><button onclick="goToMenu()" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:7px 10px;border-radius:9px;font-size:14px;cursor:pointer">🏠</button></div>
+  </div>
+  <div class="content">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:4px">
+      <div class="emp-avatar-lg" id="oemp-avatar">?</div>
+      <div><div style="font-size:17px;font-weight:700" id="oemp-nombre">—</div><div style="font-size:13px;color:var(--gris)" id="oemp-puesto">—</div></div>
+    </div>
+    <div class="emp-stat-grid">
+      <div class="emp-stat-box"><div class="emp-stat-num" id="oemp-stat-rev">0</div><div class="emp-stat-lbl">Revisiones</div></div>
+      <div class="emp-stat-box"><div class="emp-stat-num" id="oemp-stat-ok">—</div><div class="emp-stat-lbl">% OK</div></div>
+      <div class="emp-stat-box"><div class="emp-stat-box" style="padding:0"><div class="emp-stat-num" id="oemp-stat-cap">0</div><div class="emp-stat-lbl">Arts cap.</div></div></div>
+    </div>
+
+    <div class="stitle">Descuento especial esta semana</div>
+    <div class="desc-card">
+      <div style="font-size:14px;font-weight:700;color:#5c3a21;margin-bottom:4px">🏷 Descuento Chatello</div>
+      <div style="font-size:12px;color:var(--gris);margin-bottom:10px">Otorgar por desempeño sobresaliente. Selecciona quién lo autoriza:</div>
+      <div class="enc-btn-row" id="oemp-enc-btns"></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
+        <span id="oemp-desc-status" style="font-size:13px;color:var(--gris)">Sin descuento esta semana</span>
+        <button onclick="saveDescuento()" style="background:#5c3a21;color:#fff;border:none;padding:8px 14px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer">Guardar</button>
+      </div>
+    </div>
+
+    <div class="stitle">Retroalimentación</div>
+    <div class="ig">
+      <div style="display:flex;gap:8px;margin-bottom:8px">
+        <button id="retro-pos-btn" onclick="setRetroTipo('positiva')" style="flex:1;padding:8px;border:1.5px solid #81c784;border-radius:9px;font-size:12px;font-weight:600;cursor:pointer;background:#fff;color:#2e7d32">👏 Felicitación</button>
+        <button id="retro-neg-btn" onclick="setRetroTipo('llamada')" style="flex:1;padding:8px;border:1.5px solid #ef9a9a;border-radius:9px;font-size:12px;font-weight:600;cursor:pointer;background:#fff;color:#c62828">⚠️ Llamada de atención</button>
+      </div>
+      <textarea id="oemp-retro-txt" class="inp" placeholder="Escribe la retroalimentación..." style="min-height:70px"></textarea>
+      <button onclick="saveRetroEmp()" class="btn btn-primary btn-center btn-sm" style="margin-top:8px">Enviar retroalimentación</button>
+    </div>
+
+    <div id="oemp-retros-list"></div>
+
+    <div class="stitle">Últimas revisiones</div>
+    <div id="oemp-ops-list"></div>
+
+    <div class="stitle">Capacitación por categoría</div>
+    <div id="oemp-cap-list"></div>
+
+    <div style="margin-top:16px">
+      <button onclick="generarTarjetaWA()" class="btn btn-ghost btn-center">📲 Generar tarjeta para WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     OPERACIONES — LISTA EMPLEADOS
+══════════════════════════════════════════ -->
+<div id="s-ops-equipo" class="screen">
+  <div class="topbar mod-ops">
+    <div class="tb-back" onclick="goBack()">‹</div>
+    <div><div class="tb-title">Mi Equipo</div><div class="tb-sub">Ver perfil de empleados</div></div>
+    <div class="tb-right"><button onclick="goToMenu()" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:7px 10px;border-radius:9px;font-size:14px;cursor:pointer">🏠</button></div>
+  </div>
+  <div class="content">
+    <div class="search-wrap"><input id="ops-emp-search" class="inp" placeholder="Buscar empleado..." oninput="filterOpsEquipo()"></div>
+    <div id="ops-equipo-items"></div>
+  </div>
+</div>
+
 </body>
 </html>
