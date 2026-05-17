@@ -129,13 +129,13 @@ textarea.inp{min-height:80px;resize:none}
   </div>
   <div class="content" style="display:flex;flex-direction:column;align-items:center">
     <div style="font-size:14px;color:var(--gris)">Ingresa tu PIN</div>
-    <div class="pin-dots"><div class="pd" id="d0"></div><div class="pd" id="d1"></div><div class="pd" id="d2"></div><div class="pd" id="d3"></div></div>
+    <div class="pin-dots"><div class="pd" id="d0"></div><div class="pd" id="d1"></div><div class="pd" id="d2"></div><div class="pd" id="d3"></div><div class="pd" id="d4"></div><div class="pd" id="d5"></div><div class="pd" id="d6"></div><div class="pd" id="d7"></div></div>
     <div id="pin-err" style="color:#f44336;font-size:13px;min-height:20px;margin-bottom:4px;text-align:center"></div>
     <div class="kp">
       <button class="kk" onclick="pinKey('1')">1</button><button class="kk" onclick="pinKey('2')">2</button><button class="kk" onclick="pinKey('3')">3</button>
       <button class="kk" onclick="pinKey('4')">4</button><button class="kk" onclick="pinKey('5')">5</button><button class="kk" onclick="pinKey('6')">6</button>
       <button class="kk" onclick="pinKey('7')">7</button><button class="kk" onclick="pinKey('8')">8</button><button class="kk" onclick="pinKey('9')">9</button>
-      <button class="kk empty"></button><button class="kk" onclick="pinKey('0')">0</button><button class="kk" onclick="pinBack()" style="font-size:18px">⌫</button>
+      <button class="kk" onclick="doLogin()" style="font-size:16px;background:var(--naranja);color:#fff">✓</button><button class="kk" onclick="pinKey('0')">0</button><button class="kk" onclick="pinBack()" style="font-size:18px">⌫</button>
     </div>
   </div>
 </div>
@@ -651,15 +651,18 @@ function toast(msg) {
 // LOGIN
 // ════════════════════════════════════════════
 let pinVal = '';
+const PIN_MAX = 8;
 function pinKey(k) {
-  if (pinVal.length >= 4) return;
+  if (pinVal.length >= PIN_MAX) return;
   pinVal += k;
   updatePinDots();
-  if (pinVal.length === 4) setTimeout(doLogin, 200);
 }
 function pinBack() { pinVal = pinVal.slice(0,-1); updatePinDots(); document.getElementById('pin-err').textContent = ''; }
 function updatePinDots() {
-  for(let i=0;i<4;i++) document.getElementById('d'+i).classList.toggle('f', i < pinVal.length);
+  for(let i=0;i<PIN_MAX;i++) {
+    const d = document.getElementById('d'+i);
+    if (d) d.classList.toggle('f', i < pinVal.length);
+  }
 }
 async function doLogin() {
   loading('Verificando...');
