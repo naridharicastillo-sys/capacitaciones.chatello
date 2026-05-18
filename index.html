@@ -1064,7 +1064,7 @@ async function selectEmpCapacitar(id) {
   loading('Cargando progreso...');
   const [prog, arts] = await Promise.all([
     apiGet({ action:'getProgreso', empId: id }),
-    apiGet({ action:'getArticulos', rol: S.currentEmp.PUESTO })
+    apiGet({ action:'getArticulos' })
   ]);
   S.progresoEmp = prog || [];
   S.articulosEmp = arts || [];
@@ -1229,7 +1229,7 @@ async function selectEmpEvaluar(id) {
   loading('Cargando...');
   const [evals, arts] = await Promise.all([
     apiGet({action:'getEvaluaciones', empId: id}),
-    apiGet({action:'getArticulos', rol: S.currentEmp.PUESTO})
+    apiGet({action:'getArticulos'})
   ]);
   S.evaluaciones = evals || [];
   S.articulosEmp = arts || [];
