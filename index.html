@@ -1135,11 +1135,22 @@ function loadCArticle() {
   document.getElementById('ca-estado').innerHTML = est
     ? `<div style="text-align:center"><span class="bdg ${est==='Dominado'?'bdg-ok':est==='Practicado'?'bdg-warn':'bdg-pur'}" style="font-size:13px;padding:6px 14px">${est}</span></div>`
     : '<div style="text-align:center"><span class="bdg bdg-neu" style="font-size:13px;padding:6px 14px">Sin ver aún</span></div>';
-  const ingr = Array.isArray(S.currentArt.INGREDIENTES) ? S.currentArt.INGREDIENTES : [];
+  let ingr = S.currentArt.INGREDIENTES;
+  if (typeof ingr === 'string') { try { ingr = JSON.parse(ingr); } catch(e) { ingr = []; } }
+  if (!Array.isArray(ingr)) ingr = [];
   document.getElementById('ca-ingr').innerHTML = ingr.length
-    ? ingr.map(i=>`<div class="ingr-item">• ${i}</div>`).join('')
+    ? ingr.map(i => {
+        if (typeof i === 'object' && i !== null) {
+          const cant = i.cantidad || i.CANTIDAD || '';
+          const nom  = i.ingrediente || i.INGREDIENTE || i.nombre || '';
+          return `<div class="ingr-item"><span style="font-weight:600;min-width:70px;display:inline-block">${cant}</span>${nom}</div>`;
+        }
+        return `<div class="ingr-item">• ${i}</div>`;
+      }).join('')
     : '<div style="color:var(--gris);font-size:13px">Sin ingredientes registrados</div>';
-  const pasos = Array.isArray(S.currentArt.PASOS) ? S.currentArt.PASOS : [];
+  let pasos = S.currentArt.PASOS;
+  if (typeof pasos === 'string') { try { pasos = JSON.parse(pasos); } catch(e) { pasos = []; } }
+  if (!Array.isArray(pasos)) pasos = [];
   document.getElementById('ca-pasos').innerHTML = pasos.length
     ? pasos.map((p,i)=>`<div class="art-step"><div class="step-n">${i+1}</div><div>${p}</div></div>`).join('')
     : '<div style="color:var(--gris);font-size:13px">Sin pasos registrados</div>';
