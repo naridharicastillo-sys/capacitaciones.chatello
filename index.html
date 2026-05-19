@@ -418,6 +418,7 @@ textarea.inp{min-height:80px;resize:none}
 <div id="s-c-article" class="screen">
   <div class="topbar mod-c"><div class="tb-back" onclick="goBack()">‹</div><div class="tb-title" id="ca-name">Artículo</div></div>
   <div class="content">
+    <div id="ca-foto" style="text-align:center;margin-bottom:12px"></div>
     <div id="ca-estado" style="margin-bottom:14px"></div>
     <div class="card">
       <div class="stitle" style="margin-top:0">Ingredientes</div>
@@ -1101,7 +1102,7 @@ function loadCSearch() {
   document.getElementById('cs-emp-name').textContent = S.currentEmp.NOMBRE;
   const cats = [...new Set((S.articulosEmp||S.articulos).map(a=>a.CATEGORIA).filter(Boolean))];
   document.getElementById('cs-filter-cats').innerHTML = cats.map(c =>
-    `<div class="tag" onclick="toggleTag(this,'${c}')">${c}</div>`).join('');
+    `<div class="tag" onclick="toggleTag(this,'${c}');filterArticulos()">${c}</div>`).join('');
   renderCSearch(S.articulosEmp || S.articulos);
 }
 function filterArticulos() {
@@ -1127,9 +1128,19 @@ function selectArticulo(id) {
   goTo('s-c-article', true);
   loadCArticle();
 }
+const FOTOS_BASE = 'https://naridharicastillo-sys.github.io/capacitaciones.chatello/fotos/';
 function loadCArticle() {
   if (!S.currentArt) return;
   document.getElementById('ca-name').textContent = S.currentArt.NOMBRE;
+  const fotoUrl = S.currentArt.FOTO;
+  const fotoEl = document.getElementById('ca-foto');
+  if (fotoUrl) {
+    // Extract simple filename from URL like p09_04_Espresso.jpg → p09_04.jpg
+    const fname = fotoUrl.replace(/^(p\d+_\d+).*\.jpg$/i, '$1.jpg');
+    fotoEl.innerHTML = `<img src="${FOTOS_BASE}${fname}" alt="${S.currentArt.NOMBRE}" style="width:180px;height:180px;object-fit:cover;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.15)" onerror="this.parentElement.innerHTML=''">`;
+  } else {
+    fotoEl.innerHTML = '';
+  }
   const prog = S.progresoEmp.find(p=>p.ART_ID===S.currentArt.ART_ID);
   const est = prog?.ESTADO;
   document.getElementById('ca-estado').innerHTML = est
