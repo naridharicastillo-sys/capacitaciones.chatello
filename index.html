@@ -220,6 +220,7 @@ textarea.inp{min-height:80px;resize:none}
     </div>
   </div>
   <div class="content">
+    <div class="search-wrap"><input id="p-search" class="inp" type="text" placeholder="Buscar candidato..." oninput="filterPList()"></div>
     <div class="stitle">Candidatos activos</div>
     <div id="p-list-items"><div class="empty"><div class="ei">📋</div><p>No hay candidatos.<br>Toca "Nuevo" para agregar uno.</p></div></div>
   </div>
@@ -477,6 +478,14 @@ textarea.inp{min-height:80px;resize:none}
 <div id="s-e-eval" class="screen">
   <div class="topbar mod-e"><div class="tb-back" onclick="goBack()">‹</div><div><div class="tb-title" id="ee-art-name">Evaluación</div><div class="tb-sub" id="ee-emp-name">—</div></div></div>
   <div class="content">
+    <div class="stitle">Cronómetro de preparación</div>
+    <div class="card" style="padding:14px 16px;margin-bottom:14px">
+      <div style="text-align:center;font-size:38px;font-weight:700;color:var(--morado);font-variant-numeric:tabular-nums;letter-spacing:2px;margin-bottom:10px" id="ee-timer-display">0:00</div>
+      <div style="display:flex;gap:8px">
+        <button id="ee-timer-start" onclick="evalTimerToggle()" style="flex:1;padding:10px;border-radius:10px;border:none;background:var(--verde);color:#fff;font-size:13px;font-weight:700;cursor:pointer">▶ Iniciar</button>
+        <button onclick="evalTimerReset()" style="flex:1;padding:10px;border-radius:10px;border:1.5px solid var(--crema-dark);background:#fff;font-size:13px;font-weight:700;cursor:pointer;color:var(--gris)">↺ Reiniciar</button>
+      </div>
+    </div>
     <div class="stitle">Evalúa cada criterio</div>
     <div class="ev-item"><div class="ev-lbl">Ingredientes correctos</div>
       <div class="tg-group"><button class="tg" id="ev-ing-y" onclick="setEval('ing',true)">✅</button><button class="tg" id="ev-ing-n" onclick="setEval('ing',false)">❌</button></div></div>
@@ -575,6 +584,13 @@ const S = {
   opsRetroTipo: 'positiva',
   opsRevisiones: [],
 };
+
+// ── Empleados en capacitación activa ──
+const TRAINING_NAMES = ['brian', 'diego', 'enrique', 'fernando', 'gabriel'];
+function isEnTraining(emp) {
+  const nombre = (emp.NOMBRE || '').toLowerCase();
+  return TRAINING_NAMES.some(n => nombre.startsWith(n));
+}
 
 // Checklist día 1 — ítems fijos
 const CHECKLIST_ITEMS = [
@@ -777,6 +793,10 @@ function renderPList(list) {
       <span class="bdg ${bdg}">${c.ESTATUS||'Pendiente'}</span>
     </div>`;
   }).join('');
+}
+function filterPList() {
+  const q = (document.getElementById('p-search')?.value || '').toLowerCase();
+  renderPList(S.candidatos.filter(c => c.NOMBRE.toLowerCase().includes(q)));
 }
 function selectCandidato(id) {
   S.currentCand = S.candidatos.find(c => c.CAND_ID === id);
@@ -1043,17 +1063,17 @@ function loadISummary() {
 // CAPACITAR
 // ════════════════════════════════════════════
 async function loadCList() {
-  const activos = S.empleados.filter(e => e.ESTATUS === 'Activo');
+  const activos = S.empleados.filter(e => e.ESTATUS === 'Activo' && isEnTraining(e));
   document.getElementById('c-list-items').innerHTML = activos.map(e =>
     `<div class="li" onclick="selectEmpCapacitar('${e.EMP_ID}')">
       <div class="li-left"><div class="li-name">${e.NOMBRE}</div><div class="li-sub">${e.PUESTO||'—'} · ${e.TURNO||'—'}</div></div>
       <span style="color:var(--gris)">›</span>
     </div>`
-  ).join('') || '<div class="empty"><div class="ei">📚</div><p>Sin empleados activos.</p></div>';
+  ).join('') || '<div class="empty"><div class="ei">📚</div><p>Sin empleados en capacitación activa.</p></div>';
 }
 function filterCList() {
   const q = document.getElementById('c-search').value.toLowerCase();
-  document.getElementById('c-list-items').innerHTML = S.empleados.filter(e=>e.ESTATUS==='Activo'&&e.NOMBRE.toLowerCase().includes(q)).map(e =>
+  document.getElementById('c-list-items').innerHTML = S.empleados.filter(e => e.ESTATUS==='Activo' && isEnTraining(e) && e.NOMBRE.toLowerCase().includes(q)).map(e =>
     `<div class="li" onclick="selectEmpCapacitar('${e.EMP_ID}')">
       <div class="li-left"><div class="li-name">${e.NOMBRE}</div><div class="li-sub">${e.PUESTO||'—'}</div></div>
       <span style="color:var(--gris)">›</span>
@@ -1088,26 +1108,35 @@ function loadCProgress() {
   S.progresoEmp.filter(p=>p.ESTADO==='Dominado').forEach(p => { const a=S.articulosEmp?.find(x=>x.ART_ID===p.ART_ID); if(a&&cats[a.CATEGORIA]) cats[a.CATEGORIA].dom++; });
   document.getElementById('cp-cats').innerHTML = Object.entries(cats).map(([cat,v]) => {
     const pct = Math.round((v.dom/v.total)*100);
-    return `<div class="card" style="padding:12px">
+    const safeCat = cat.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+    return `<div class="card" style="padding:12px;cursor:pointer;active:opacity:.7" data-cat="${safeCat}" onclick="goToCatFilter(this.dataset.cat)">
       <div style="display:flex;justify-content:space-between;margin-bottom:4px">
         <span style="font-size:13px;font-weight:600">${cat}</span>
-        <span style="font-size:12px;color:var(--gris)">${v.dom}/${v.total}</span>
+        <span style="font-size:12px;color:var(--gris)">${v.dom}/${v.total} <span style="color:var(--naranja);font-weight:700">›</span></span>
       </div>
       <div class="prog-bar" style="margin:0"><div class="prog-fill" style="width:${pct}%"></div></div>
     </div>`;
   }).join('');
 }
-function loadCSearch() {
+function goToCatFilter(cat) {
+  goTo('s-c-search', true);
+  loadCSearch(cat);
+}
+function loadCSearch(preselectedCat) {
   if (!S.currentEmp) return;
   document.getElementById('cs-emp-name').textContent = S.currentEmp.NOMBRE;
+  document.getElementById('cs-search').value = '';
   const cats = [...new Set((S.articulosEmp||S.articulos).map(a=>a.CATEGORIA).filter(Boolean))];
-  document.getElementById('cs-filter-cats').innerHTML = cats.map(c =>
-    `<div class="tag" onclick="toggleTag(this,'${c}');filterArticulos()">${c}</div>`).join('');
-  renderCSearch(S.articulosEmp || S.articulos);
+  document.getElementById('cs-filter-cats').innerHTML = cats.map(c => {
+    const safeCat = c.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+    const sel = preselectedCat && preselectedCat === c ? ' sel' : '';
+    return `<div class="tag${sel}" data-cat="${safeCat}" onclick="this.classList.toggle('sel');filterArticulos()">${c}</div>`;
+  }).join('');
+  filterArticulos();
 }
 function filterArticulos() {
-  const q = document.getElementById('cs-search').value.toLowerCase();
-  const cats = [...document.querySelectorAll('#cs-filter-cats .tag.sel')].map(t=>t.dataset.val||t.textContent.trim());
+  const q = (document.getElementById('cs-search')?.value || '').toLowerCase();
+  const cats = [...document.querySelectorAll('#cs-filter-cats .tag.sel')].map(t => t.dataset.cat || t.textContent.trim());
   let list = (S.articulosEmp || S.articulos).filter(a => a.NOMBRE.toLowerCase().includes(q));
   if (cats.length) list = list.filter(a => cats.includes(a.CATEGORIA));
   renderCSearch(list);
@@ -1128,7 +1157,7 @@ function selectArticulo(id) {
   goTo('s-c-article', true);
   loadCArticle();
 }
-const FOTOS_BASE = 'https://naridharicastillo-sys.github.io/capacitaciones.chatello/fotos/';
+const FOTOS_BASE = 'https://naridharicastillo-sys.github.io/capacitaciones.chatello/';
 function loadCArticle() {
   if (!S.currentArt) return;
   document.getElementById('ca-name').textContent = S.currentArt.NOMBRE;
@@ -1202,6 +1231,29 @@ function timerReset() {
 }
 function timerFmt(s) { return Math.floor(s/60) + ':' + String(s%60).padStart(2,'0'); }
 
+// ── Cronómetro Evaluar ──
+let _evalTimerInterval = null, _evalTimerSecs = 0, _evalTimerRunning = false;
+function evalTimerToggle() {
+  const btn = document.getElementById('ee-timer-start');
+  if (_evalTimerRunning) {
+    clearInterval(_evalTimerInterval); _evalTimerRunning = false;
+    btn.textContent = '▶ Continuar'; btn.style.background = 'var(--morado)';
+  } else {
+    _evalTimerRunning = true;
+    btn.textContent = '⏸ Pausar'; btn.style.background = '#c62828';
+    _evalTimerInterval = setInterval(function() {
+      _evalTimerSecs++;
+      document.getElementById('ee-timer-display').textContent = timerFmt(_evalTimerSecs);
+    }, 1000);
+  }
+}
+function evalTimerReset() {
+  clearInterval(_evalTimerInterval); _evalTimerRunning = false; _evalTimerSecs = 0;
+  document.getElementById('ee-timer-display').textContent = '0:00';
+  const btn = document.getElementById('ee-timer-start');
+  if (btn) { btn.textContent = '▶ Iniciar'; btn.style.background = 'var(--verde)'; }
+}
+
 async function saveAvance() {
   if (!S.avanceSelected) { toast('Selecciona el estado primero'); return; }
   const tiempo = document.getElementById('cr-tiempo').value.trim();
@@ -1228,23 +1280,25 @@ function loadCRegister() {
 // ════════════════════════════════════════════
 // EVALUAR
 // ════════════════════════════════════════════
+function renderEmpEvalList(list) {
+  document.getElementById('e-list-items').innerHTML = list.map(e => {
+    const en = isEnTraining(e);
+    const bdg = en
+      ? '<span class="bdg bdg-warn">En cap.</span>'
+      : '<span class="bdg bdg-ok">Completó</span>';
+    return `<div class="li" onclick="selectEmpEvaluar('${e.EMP_ID}')">
+      <div class="li-left"><div class="li-name">${e.NOMBRE}</div><div class="li-sub">${e.PUESTO||'—'}</div></div>
+      ${bdg}
+    </div>`;
+  }).join('') || '<div class="empty"><p>Sin empleados.</p></div>';
+}
 async function loadEList() {
   const activos = S.empleados.filter(e => e.ESTATUS === 'Activo');
-  document.getElementById('e-list-items').innerHTML = activos.map(e =>
-    `<div class="li" onclick="selectEmpEvaluar('${e.EMP_ID}')">
-      <div class="li-left"><div class="li-name">${e.NOMBRE}</div><div class="li-sub">${e.PUESTO||'—'}</div></div>
-      <span style="color:var(--gris)">›</span>
-    </div>`
-  ).join('');
+  renderEmpEvalList(activos);
 }
 function filterEList() {
   const q = document.getElementById('e-search').value.toLowerCase();
-  document.getElementById('e-list-items').innerHTML = S.empleados.filter(e=>e.ESTATUS==='Activo'&&e.NOMBRE.toLowerCase().includes(q)).map(e =>
-    `<div class="li" onclick="selectEmpEvaluar('${e.EMP_ID}')">
-      <div class="li-left"><div class="li-name">${e.NOMBRE}</div><div class="li-sub">${e.PUESTO||'—'}</div></div>
-      <span style="color:var(--gris)">›</span>
-    </div>`
-  ).join('');
+  renderEmpEvalList(S.empleados.filter(e => e.ESTATUS==='Activo' && e.NOMBRE.toLowerCase().includes(q)));
 }
 async function selectEmpEvaluar(id) {
   S.currentEmp = S.empleados.find(e=>e.EMP_ID===id);
@@ -1255,6 +1309,13 @@ async function selectEmpEvaluar(id) {
   ]);
   S.evaluaciones = evals || [];
   S.articulosEmp = arts || [];
+  // Si el empleado no está en capacitación activa, simular que dominó todo
+  if (!isEnTraining(S.currentEmp)) {
+    S.progresoEmp = S.articulosEmp.map(a => ({ ART_ID: a.ART_ID, ESTADO: 'Dominado' }));
+  } else {
+    const prog = await apiGet({action:'getProgreso', empId: id});
+    S.progresoEmp = prog || [];
+  }
   doneLoading();
   goTo('s-e-article', true);
   loadEArticle();
@@ -1295,6 +1356,7 @@ function selectArtEvaluar(id) {
     document.getElementById('ev-'+k+'-n').className='tg';
   });
   document.getElementById('ev-notas').value='';
+  evalTimerReset();
 }
 function setEval(key, val) {
   S.evalState[key] = val;
